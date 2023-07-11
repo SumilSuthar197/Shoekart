@@ -1,5 +1,4 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import Footer from './components/Footer';
 import HomeLayout from './pages/Homelayout';
 
 const router = createBrowserRouter([
@@ -10,13 +9,13 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <h1>cgdfh</h1>,
+        element: <h1>hi</h1>,
         errorElement: <h1>error</h1>,
         // loader: landingLoader(queryClient),
       },
       {
         path: 'about',
-        element: <Footer />,
+        element: <h1>hello</h1>,
       },
     ],
   },

@@ -1,5 +1,6 @@
 import { Outlet, useNavigation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const HomeLayout = () => {
   const navigation = useNavigation();
@@ -16,7 +17,7 @@ const HomeLayout = () => {
           <Outlet context={{ value }} />
         )}
       </section>
-      
+      <Footer/>
     </>
   );
 };
