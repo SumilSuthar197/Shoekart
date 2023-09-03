@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import CartLayout from "./pages/CartLayout";
 import ContactPage from "./pages/ContactPage";
 import Product from "./pages/Product";
-import HomeLayout from "./pages/Homelayout";
+import HomeLayout from "./pages/HomeLayout";
 
 const router = createBrowserRouter([
   {
