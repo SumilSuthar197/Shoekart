@@ -1,0 +1,24 @@
+.searchform{
+    width: 100%;
+        font-family: "League Spartan", "Poppins", sans-serif;
+}
+.searchform input{
+    width: 43%;
+    height: 35px;
+    padding-left: 10px;
+    font-size: 16px;
+    outline: none;
+    border-color: #d3d3d3;
+    border-width: 2px;
+    border-style: solid;
+}
+.searchform button{
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    color: white;
+    background-color: red;
+    outline: none;
+    cursor: pointer;
+    padding: 8px 21px;
+}

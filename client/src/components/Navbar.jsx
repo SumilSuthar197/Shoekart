@@ -1,14 +1,20 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import "../styles/navbar.css";
 import logo from "../assets/LOGO.svg";
 import { FiSearch, FiMenu } from "react-icons/fi";
 import { FaShoppingCart } from "react-icons/fa";
 import { CgProfile, CgClose } from "react-icons/cg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { calculateTotals } from "../features/cart/cartslice";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const { amount, cartItem } = useSelector((store) => store.cart);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(calculateTotals());
+  }, [cartItem, dispatch]);
   return (
     <div className="navigation-bar">
       <div
@@ -41,7 +47,7 @@ const Navbar = () => {
           Home
         </NavLink>
         <NavLink
-          to="/trending"
+          to="/#trending"
           className="nav-link"
           onClick={() => {
             setIsOpen(!isOpen);
@@ -49,7 +55,13 @@ const Navbar = () => {
         >
           Trending
         </NavLink>
-        <NavLink to="/products" className="nav-link">
+        <NavLink
+          to="/products"
+          className="nav-link"
+          onClick={() => {
+            setIsOpen(!isOpen);
+          }}
+        >
           Products
         </NavLink>
         <NavLink
@@ -81,7 +93,10 @@ const Navbar = () => {
             <FiSearch />
           </div>
           <div className="btnIcon">
-            <FaShoppingCart />
+            <Link to="/cart" style={{ color: "#1a1a1a" }}>
+              <FaShoppingCart />
+              <div className="navAmount">{amount}</div>
+            </Link>
           </div>
           <div className="btnIcon">
             <CgProfile />

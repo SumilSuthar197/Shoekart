@@ -1,0 +1,251 @@
+.cartMainContainer {
+  font-family: "Inter", sans-serif;
+  margin: 2% 3% 4%;
+}
+
+.cHeader {
+  font-family: "Inter", sans-serif;
+  font-size: 24px;
+}
+
+.cartContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.cartContainer1 {
+  width: 70%;
+}
+
+.cartHeader,
+.cartProduct {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  font-size: 19px;
+  border-bottom: 1px solid #5a5959;
+  padding-bottom: 10px;
+  color: #1a1a1a;
+}
+.cartProduct {
+  margin: 6px 0;
+  font-size: 18px;
+}
+.cProduct-name {
+  width: 44%;
+  display: flex;
+  flex-direction: row;
+}
+.cSize,
+.cPrice,
+.cQuantity,
+.cTotal {
+  width: 14%;
+  text-align: center;
+}
+.cProduct-name span {
+  font-size: 16px;
+  padding-left: 13px;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+}
+.cartPageBtn1 {
+  text-decoration: none;
+  font-family: "League Spartan", "Poppins", sans-serif;
+  font-weight: 600;
+  color: #939393;
+  background-color: white;
+  border: none;
+  font-size: 12px;
+  padding: 2px 10px 0 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+.cartPageBtn1:hover {
+  text-decoration: none;
+  color: #54bab9;
+  transition: 0.3s ease;
+}
+.cartItemDetails {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+.cQuantity button {
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  margin: 0 3px;
+  font-size: 15px;
+  height: 10px;
+}
+.cartContainer2 {
+  margin: auto;
+  position: relative;
+}
+.cartSummary {
+  font-family: "Inter", sans-serif;
+  background-color: #e5e5e5;
+  color: #1a1a1a;
+  border-radius: 9px;
+  width: 360px;
+  padding: 10px 25px;
+}
+.summaryHeader {
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  border-bottom: 1px solid #1a1a1a;
+  padding: 5px 0 8px;
+  margin-bottom: 5px;
+}
+.subTotal,
+.tax,
+.shippingCharge,
+.giftcard,
+.finalPrize,
+.codeInput {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 8px 0;
+}
+.codeInput input {
+  padding: 11px;
+  width: 230px;
+  font-family: "League Spartan", "Poppins", sans-serif;
+  font-size: 16px;
+  color: #1a1a1a;
+  border-radius: 7px;
+  border-style: none;
+  outline: none;
+}
+.codeInput button {
+  padding: 0 20px;
+  height: 34px;
+  border-radius: 7px;
+  border-style: none;
+  font-size: 14px;
+  font-weight: 800;
+  font-family: "League Spartan", "Poppins", sans-serif;
+  background-color: red;
+  border: 1px solid red;
+  color: white;
+  cursor: pointer;
+}
+.finalPrize {
+  padding: 14px 0 41px;
+  border-top: 1px solid #1a1a1a;
+  margin: 10px 0 0;
+}
+.checkoutInput button {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 42px;
+  font-size: 16px;
+  font-family: "League Spartan", "Poppins", sans-serif;
+  font-weight: 800;
+  color: #645e5e;
+  cursor: pointer;
+  background-color: red;
+  color: white;
+  border: 1px solid red;
+  border-radius: 9px;
+}
+.checkoutInput button:hover,
+.codeInput button:hover {
+  background-color: white;
+  color: red;
+  border-radius: 1px solid red;
+}
+.cs-prize {
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-flex;
+  gap: 5px;
+}
+.cProduct-name img {
+  height: 80px;
+  width: 90px;
+}
+
+@media only screen and (max-width: 1300px) {
+  .cartSummary {
+    width: 350px;
+  }
+  .cartContainer2 {
+    margin-left: 26px;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .cartContainer {
+    flex-direction: column;
+  }
+  .cartContainer1 {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  .cartContainer2 {
+    margin-left: 0px;
+    width: 100%;
+  }
+  .cartSummary {
+    width: 100%;
+  }
+  .codeInput input {
+    width: -webkit-fill-available;
+    margin-right: 15px;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .cSize,
+  .cPrice {
+    display: none;
+  }
+  .cProduct-name {
+    width: 64%;
+  }
+  .cQuantity,
+  .cTotal {
+    width: 18%;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .cProduct-name img {
+    height: 75px;
+    width: 80px;
+  }
+  .cProduct-name span {
+    font-size: 14px;
+    padding-left: 7px;
+  }
+  .cQuantity button {
+    margin: 0 1px;
+    font-size: 13px;
+  }
+  .cartProduct {
+    font-size: 15px;
+  }
+  .cHeader {
+    text-align: center;
+    font-size: 22px;
+    margin-top: 15px;
+  }
+  .cartHeader,
+  .cartProduct {
+    font-size: 17px;
+    margin-top: 10px;
+  }
+}

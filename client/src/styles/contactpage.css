@@ -1,0 +1,209 @@
+.Header_title {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 4% 5%;
+  color: #fff;
+  font-family: "League Spartan", sans-serif, "Poppins";
+}
+.Header_title h1 {
+  font-weight: 900;
+  font-size: 55px;
+  font-style: normal;
+}
+.Header_title h2 {
+  font-size: 22px;
+  font-weight: 400;
+  margin-top: -17px;
+  /* margin: -17px auto 30px; */
+}
+
+@media only screen and (max-width: 771px) {
+  .Header_title {
+    padding: 7% 5%;
+  }
+  .Header_title h1 {
+    font-size: 36px;
+  }
+  .Header_title h2 {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (max-width: 580px) {
+  .Header_title {
+    padding: 9% 5%;
+  }
+  .Header_title h1 {
+    font-size: 27px;
+  }
+  .Header_title h2 {
+    font-size: 16px;
+    margin-top: -5px;
+  }
+}
+
+.contact-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3% 6%;
+}
+
+.company-details {
+  width: 40%;
+}
+.map {
+  width: 55%;
+}
+.company-details span,
+.form-details form span {
+  font-size: 17px;
+}
+.company-details h2,
+.form-details form h2 {
+  font-size: 34px;
+  line-height: 43px;
+  padding: 8px 0;
+}
+.company-details h3 {
+  padding-bottom: 15px;
+  font-size: 20px;
+}
+.contactAddress ul {
+  font-size: 18px;
+}
+.contactAddress ul li {
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.contactAddress ul li div {
+  padding-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+@media only screen and (max-width: 845px) {
+  .contact-details {
+    flex-direction: column;
+  }
+  .company-details {
+    width: 100%;
+    margin-left: 20px;
+    margin-top: 15px;
+  }
+  .map {
+    width: 100%;
+  }
+  .company-details h2 {
+    font-size: 29px;
+    line-height: 36px;
+    padding: 2px 0;
+  }
+  .company-details h3 {
+    padding-bottom: 0px;
+    padding-top: 6px;
+    font-size: 19px;
+  }
+  .company-details span {
+    display: none;
+  }
+  .contactAddress {
+    margin: 4px 0;
+  }
+}
+
+.form-details {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 5%;
+  padding: 40px;
+  border: 1px solid #e1e1e1;
+}
+.form-details form {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form-details form input,
+.form-details form textarea {
+  font-family: "League Spartan", "Poppins", sans-serif;
+  font-size: 14px;
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  outline: none;
+  border: 1px solid #e1e1e1;
+}
+
+.form-details form button {
+  font-family: "League Spartan", "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  border: 1px solid red;
+  color: white;
+  background-color: red;
+  outline: none;
+  cursor: pointer;
+  padding: 11px 21px;
+}
+
+.form-details .people {
+  font-family: "Poppins", sans-serif;
+  margin-top: 29px;
+  width: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.form-details .people div {
+  padding: 20px 0;
+  display: flex;
+  align-items: flex-start;
+}
+.form-details .people div img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  margin-right: 15px;
+  border-radius: 50%;
+}
+.form-details .people div p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 25px;
+}
+.form-details .people div span {
+  display: block;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+@media only screen and (max-width: 1024px) {
+  .form-details .people {
+    display: none;
+  }
+  .form-details form {
+    width: 100%;
+  }
+  .form-details {
+    padding: 24px;
+  }
+  .form-details form h2 {
+    font-size: 25px;
+    line-height: 34px;
+    padding: 2px 0 14px;
+  }
+  .form-details form span{
+    font-size: 14px;
+  }
+  
+}

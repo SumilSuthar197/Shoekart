@@ -31,7 +31,8 @@
 .logo img {
   height: 27px;
 }
-.nav-links,.nav-links-md {
+.nav-links,
+.nav-links-md {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -82,8 +83,26 @@
   padding: 6.4px;
 }
 .btnIcon {
+  position: relative;
   font-size: 27px;
   padding: 0 10px;
+  color: #1a1a1a;
+}
+.navAmount {
+  position: absolute;
+  top: 1px;
+  right: 5px;
+  font-size: 12px;
+  background-color: #1a1a1a;
+  color: white;
+  border-radius: 50%;
+  margin: 0;
+  height: 17px;
+  text-align: center;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .btnMenu {
   font-size: 30px;
@@ -259,7 +278,7 @@
   .subscription-c2 button {
     padding: 11px 14px;
   }
-} 
+}
 @media only screen and (max-width: 600px) {
   .subscription-c1 span:first-child {
     font-size: 20px;
@@ -280,7 +299,7 @@
 
 /* Footer */
 .footer {
-  font-family: 'Poppins',sans-serif;
+  font-family: "Poppins", sans-serif;
   display: grid;
   justify-content: center;
   align-content: center;
@@ -298,7 +317,7 @@
   grid-template-columns: 1.5fr 1fr 1fr 1fr;
   grid-gap: 20px;
 }
-.footer-container .sec{
+.footer-container .sec {
   margin: 0 auto;
 }
 .footer-container .sec h2 {
@@ -360,36 +379,35 @@
   color: black;
   border-top: 1px solid rgba(0, 0, 0, 0.4);
 }
-.copyrightText a{
+.copyrightText a {
   text-decoration: none;
   color: black;
   font-weight: bold;
 }
 
 @media only screen and (max-width: 991px) {
-  .footer{
+  .footer {
     padding: 30px;
     padding-bottom: 20px;
   }
-  .footer-container{
+  .footer-container {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
     grid-gap: 20px;
   }
-  .copyrightText{
+  .copyrightText {
     padding: 20px 40px 0px;
   }
-  .footer-container .sec{
+  .footer-container .sec {
     margin: 0;
   }
-  
 }
 @media only screen and (max-width: 768px) {
-  .footer-container{
+  .footer-container {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(1,1fr);
+    grid-template-columns: repeat(1, 1fr);
     gap: 20px;
   }
 }
