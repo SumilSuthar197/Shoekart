@@ -1,5 +1,4 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import HomeLayout from "./pages/Homelayout";
 import LandingPage from "./pages/LandingPage";
 import ProductDetails from "./components/ProductDetails";
 import { loader as singleProductLoader } from "./components/ProductDetails";
@@ -7,11 +6,12 @@ import { useEffect } from "react";
 import CartLayout from "./pages/CartLayout";
 import ContactPage from "./pages/ContactPage";
 import Product from "./pages/Product";
+import HomeLayout from "./pages/Homelayout";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomeLayout />,
+    element: <HomeLayout/>,
     errorElement: <h1>error</h1>,
     children: [
       {
