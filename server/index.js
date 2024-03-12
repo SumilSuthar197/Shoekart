@@ -32,7 +32,7 @@ app.use(errorHandlerMiddleware);
 const port = process.env.PORT || 5000;
 const StartServer = async () => {
   try {
-    app.listen(port, "0.0.0.0", () => {
+    app.listen(port, () => {
       console.log(`Server is running on http://localhost:${port}`);
     });
 
