@@ -1,6 +1,6 @@
 import Header from "../components/Header";
 import { FaRegMap, FaPhoneAlt, FaClock } from "react-icons/fa";
-import { SlEnvolope } from "react-icons/Sl";
+import { FiMail } from "react-icons/fi";
 import ContactForm from "../components/ContactForm";
 
 const ContactPage = () => {
@@ -29,7 +29,7 @@ const ContactPage = () => {
               </li>
               <li>
                 <div>
-                  <SlEnvolope />
+                  <FiMail />
                 </div>{" "}
                 contactus@nike.com
               </li>
@@ -59,7 +59,7 @@ const ContactPage = () => {
           ></iframe>
         </div>
       </div>
-      <ContactForm/>
+      <ContactForm />
     </>
   );
 };
