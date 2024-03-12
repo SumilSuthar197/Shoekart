@@ -1,0 +1,102 @@
+.login-page {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  background-color: #fff;
+}
+.login-div {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login-box {
+  width: 100%;
+  padding: 20%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.login-image-r {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background-color: #e5e5e5;
+}
+.login-heading {
+  color: rgb(31 41 55 / 1);
+  font-size: clamp(2rem, 2.5vw, 3rem);
+  line-height: 2rem;
+  font-weight: 700;
+}
+.login-subheading {
+  color: rgb(75 85 99 / 1);
+  font-size: clamp(1.1rem, 1.2vw, 1.4rem);
+  line-height: 1rem;
+  font-weight: 500;
+  margin-top: clamp(0.75rem, 1.5vw, 1.5rem);
+}
+.login-form {
+  display: flex;
+  gap: 0.8rem;
+  flex-direction: column;
+  margin: 1.75rem 0 1rem;
+}
+.input-div label {
+  font-size: 1rem;
+  color: rgb(75 85 99/1);
+  font-weight: 500;
+  text-align: left;
+}
+.input-div input {
+  width: 100%;
+  border-radius: 0.5rem;
+  color: rgb(31 41 55 / 1);
+  border: 1px solid rgb(31 41 55 / 1);
+  margin-top: 0.5rem;
+  padding: 0.6rem 0.75rem;
+  text-align: left;
+  outline: none;
+}
+.login-button {
+  padding: 0.6rem 0.75rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  margin-top: 0.75rem;
+  border: 0;
+  font-weight: 500;
+  color: #ffffff;
+  background-color: #ea454c;
+  cursor: pointer;
+}
+.login-button:hover {
+  background-color: #ff5a5f;
+}
+.forget-button button {
+  border: none;
+  background-color: transparent;
+  font-size: 15px;
+  color: rgb(75 85 99/1);
+  font-weight: 500;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+}
+.forget-button button:hover {
+  color: #ff5a5f;
+}
+@media screen and (max-width: 1000px) {
+  .div1 {
+    width: 100%;
+  }
+  .div2 {
+    display: none;
+  }
+  .login-box {
+    padding: 8%;
+  }
+  .login-form{
+    gap: 1rem;
+  }
+}

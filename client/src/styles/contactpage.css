@@ -10,14 +10,13 @@
 }
 .Header_title h1 {
   font-weight: 900;
-  font-size: 55px;
+  font-size: clamp(23px, 3.5vw, 80px);
   font-style: normal;
 }
 .Header_title h2 {
   font-size: 22px;
   font-weight: 400;
   margin-top: -17px;
-  /* margin: -17px auto 30px; */
 }
 
 @media only screen and (max-width: 771px) {
@@ -25,7 +24,7 @@
     padding: 7% 5%;
   }
   .Header_title h1 {
-    font-size: 36px;
+    /* font-size: 36px; */
   }
   .Header_title h2 {
     font-size: 20px;
@@ -34,10 +33,10 @@
 
 @media only screen and (max-width: 580px) {
   .Header_title {
-    padding: 9% 5%;
+    padding: 7% 5% 9%;
   }
   .Header_title h1 {
-    font-size: 27px;
+    /* font-size: 27px; */
   }
   .Header_title h2 {
     font-size: 16px;
@@ -202,8 +201,7 @@
     line-height: 34px;
     padding: 2px 0 14px;
   }
-  .form-details form span{
+  .form-details form span {
     font-size: 14px;
   }
-  
 }

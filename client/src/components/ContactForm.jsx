@@ -18,31 +18,31 @@ const ContactForm = () => {
       </form>
       <div className="people">
         <div>
-          <img src="https://hevc.in/sumil.jpeg" alt="" />
+        <img src="https://secdatacom.no/wp-content/uploads/sites/3/2019/10/blank-profile-male.jpg" alt="profile-photo" />
           <p>
             <span>Sumil Suthar</span>Senior Marketing Manager <br />
             Email: sumil@hevc.in
           </p>
         </div>
         <div>
-          <img src="https://hevc.in/ajay.webp" alt="" />
+          <img src="https://secdatacom.no/wp-content/uploads/sites/3/2019/10/blank-profile-male.jpg" alt="profile-photo" />
           <p>
-            <span>Ajay Maurya</span>Senior Marketing Manager <br />
-            Email: ajay@hevc.in
+            <span>John smilga</span>Senior Marketing Manager <br />
+            Email: john@hevc.in
           </p>
         </div>
         <div>
-          <img src="https://hevc.in/sarthak.jpeg" alt="" />
+        <img src="https://secdatacom.no/wp-content/uploads/sites/3/2019/10/blank-profile-male.jpg" alt="profile-photo" />
           <p>
-            <span>Sarthak Tanpure</span>Senior Marketing Manager <br />
-            Email: sarthak@hevc.in
+            <span>David Malan</span>Senior Marketing Manager <br />
+            Email: david@hevc.in
           </p>
         </div>
         <div>
-          <img src="https://hevc.in/anas.jpeg" alt="" />
+        <img src="https://secdatacom.no/wp-content/uploads/sites/3/2019/10/blank-profile-male.jpg" alt="profile-photo" />
           <p>
-            <span>Anas Khan</span>Senior Marketing Manager <br />
-            Email: anas@hevc.in
+            <span>Tom Cruise</span>Senior Marketing Manager <br />
+            Email: tom@hevc.in
           </p>
         </div>
         {/* <div>

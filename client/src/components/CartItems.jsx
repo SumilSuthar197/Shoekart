@@ -1,4 +1,3 @@
-import shoeImage from "../Images/shoes/s1.svg";
 import { AiFillDelete, AiFillHeart } from "react-icons/Ai";
 import { HiMinusCircle, HiPlusCircle } from "react-icons/Hi";
 import { useDispatch } from "react-redux";
@@ -12,7 +11,7 @@ const CartItems = (Data) => {
       <div className="cartProduct">
         <h5 className="cProduct-name">
           <Link to={`/product/${Data.id}`} style={{ textDecoration: "none" }}>
-            <img src={shoeImage} alt="image" />
+            <img src={Data.image} alt="image" />
           </Link>
           <span>
             {Data.name}

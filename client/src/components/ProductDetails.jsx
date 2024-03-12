@@ -1,32 +1,32 @@
-import { useLoaderData } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import products from "../Data";
 import "../styles/productDetails.css";
-import shoeImage from "../Images/shoes/s1.svg";
 import { useDispatch } from "react-redux";
 import { addItem } from "../features/cart/cartslice";
 
-export const loader =
-  () =>
-  async ({ params }) => {
-    const { id } = params;
-    return { id };
-  };
+// export const loader =
+//   () =>
+//   async ({ params }) => {
+//     const { id } = params;
+//     return { id };
+//   };
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
-  const { id } = useLoaderData();
+  // const { id } = useLoaderData();
+  const { id } = useParams();
   const info = products.filter((item) => item.id == id);
   console.log(info[0]);
   return (
     <section className="product-bg">
       <div className="pImages">
         <div className="prod-image">
-          <img src="https://shoes-ecommerce-site.netlify.app/images/shoes/s4.svg" alt="" />
+          <img src={info[0].image} alt="img" />
         </div>
         <div className="pRow">
-          <img src={shoeImage} alt="" />
-          <img src={shoeImage} alt="" />
-          <img src={shoeImage} alt="" />
+          <img src={info[0].image} alt="img" />
+          <img src={info[0].image} alt="img" />
+          <img src={info[0].image} alt="img" />
         </div>
       </div>
       <div className="prod-details-cont">

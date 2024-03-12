@@ -1,23 +1,23 @@
-import { Outlet, useNavigation } from 'react-router-dom';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import { Outlet } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const HomeLayout = () => {
-  const navigation = useNavigation();
+  // const navigation = useNavigation();
 
-  const isPageLoading = navigation.state === 'loading';
-  const value = 'some value';
+  // const isPageLoading = navigation.state === 'loading';
+  // const value = "some value";
   return (
     <>
-      <Navbar/>
-      <section className='page'>
-        {isPageLoading ? (
+      <Navbar />
+      <section className="page">
+        {/* {isPageLoading ? (
           <div className='loading' />
-        ) : (
-          <Outlet context={{ value }} />
-        )}
+        ) : ( */}
+        <Outlet />
+        {/* )} */}
       </section>
-      <Footer/>
+      <Footer />
     </>
   );
 };

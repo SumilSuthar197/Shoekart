@@ -10,9 +10,9 @@
   flex-direction: column;
 }
 .prod-image {
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   background-color: #e5e5e5;
   height: 480px;
   overflow: hidden;

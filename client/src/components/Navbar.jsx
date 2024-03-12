@@ -4,11 +4,18 @@ import logo from "../assets/LOGO.svg";
 import { FiSearch, FiMenu } from "react-icons/fi";
 import { FaShoppingCart } from "react-icons/fa";
 import { CgProfile, CgClose } from "react-icons/cg";
+import { BiLogIn } from "react-icons/bi";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { calculateTotals } from "../features/cart/cartslice";
+import useAuth from "../../hooks/useAuth";
 
 const Navbar = () => {
+  const handleTrendingClick = () => {
+    const trendingSection = document.getElementById("featuredProd");
+    trendingSection.scrollIntoView({ behavior: "smooth" });
+  };
+  const { auth } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const { amount, cartItem } = useSelector((store) => store.cart);
   const dispatch = useDispatch();
@@ -51,6 +58,7 @@ const Navbar = () => {
           className="nav-link"
           onClick={() => {
             setIsOpen(!isOpen);
+            handleTrendingClick();
           }}
         >
           Trending
@@ -65,7 +73,7 @@ const Navbar = () => {
           Products
         </NavLink>
         <NavLink
-          to="/about"
+          to="/"
           className="nav-link"
           onClick={() => {
             setIsOpen(!isOpen);
@@ -84,13 +92,11 @@ const Navbar = () => {
         </NavLink>
       </div>
       <div className="nav-button">
-        {/* <div className="search-bar">
-          <span className="searchIcon"><FiSearch /></span>
-          <input type="text" name="search" id="search" className="search" placeholder="Search Product..."/>
-        </div> */}
         <div className="nav-btn">
           <div className="btnIcon">
-            <FiSearch />
+            <Link to="/products" style={{ color: "#1a1a1a" }}>
+              <FiSearch />
+            </Link>
           </div>
           <div className="btnIcon">
             <Link to="/cart" style={{ color: "#1a1a1a" }}>
@@ -99,7 +105,26 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="btnIcon">
-            <CgProfile />
+            {auth ? (
+              <>
+                <CgProfile />
+                <ul className="dropdown">
+                  <li>
+                    <Link className="#">My Profile</Link>
+                  </li>
+                  <li>
+                    <Link className="#">Orders</Link>
+                  </li>
+                  <li>
+                    <Link className="#">Logout</Link>
+                  </li>
+                </ul>
+              </>
+            ) : (
+              <Link to="/login">
+                <BiLogIn />
+              </Link>
+            )}
           </div>
         </div>
       </div>

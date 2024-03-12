@@ -15,10 +15,10 @@ const Footer = () => {
           <span>NEW RELEASES,SPECIAL OFFER AND MORE</span>
         </div>
         <div className="subscription-c2">
-          <form action="" method="post">
+          <div>
             <input type="email" name="" placeholder="Enter Your Email" id="" />
             <button type="submit">Subscribe</button>
-          </form>
+          </div>
         </div>
       </section>
       <section className="footer">
@@ -33,16 +33,24 @@ const Footer = () => {
               </p>
               <ul className="footer-social">
                 <li>
-                  <a href="/" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
+                  <a href="/" target="_blank" rel="noopener noreferrer">
+                    <FaFacebook />
+                  </a>
                 </li>
                 <li>
-                  <a href="/" target="_blank" rel="noopener noreferrer"><FaTwitter /></a>
+                  <a href="/" target="_blank" rel="noopener noreferrer">
+                    <FaTwitter />
+                  </a>
                 </li>
                 <li>
-                  <a href="/" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
+                  <a href="/" target="_blank" rel="noopener noreferrer">
+                    <FaInstagram />
+                  </a>
                 </li>
                 <li>
-                  <a href="/" target="_blank" rel="noopener noreferrer"><FaYoutube /></a>
+                  <a href="/" target="_blank" rel="noopener noreferrer">
+                    <FaYoutube />
+                  </a>
                 </li>
               </ul>
             </div>
@@ -123,7 +131,7 @@ const Footer = () => {
             <p>
               Made By{" "}
               <a
-                href="https://github.com/SumilSuthar197"
+                href="https://www.linkedin.com/in/sumilsuthar/"
                 target="_blank"
                 rel="noopener noreferrer"
               >

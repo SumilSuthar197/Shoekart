@@ -26,7 +26,7 @@ const CartLayout = () => {
             {cartItem.map((item) => {
               return <CartItems key={item.id} {...item} />;
             })}
-            <center style={{margin:"15px 0 0"}}>{emptyString}</center>
+            <center style={{ margin: "15px 0 0" }}>{emptyString}</center>
           </div>
         </div>
         <div className="cartContainer2">
@@ -38,7 +38,7 @@ const CartLayout = () => {
             </p>
             <p className="tax">
               <span>Tax :</span>
-              <span className="cs-prize">${(total * 0.18).toFixed(2)}</span>
+              <span className="cs-prize">${(total * 0.12).toFixed(2)}</span>
             </p>
             <p className="shippingCharge">
               <span>Shipping Charge :</span>

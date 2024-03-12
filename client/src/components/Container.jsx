@@ -1,88 +1,55 @@
-import image4 from "../Images/shoes/image 3.svg";
-import image2 from "../Images/shoes/image 1.svg";
-import image3 from "../Images/shoes/image 2.svg";
-import image5 from "../Images/shoes/image 4.svg";
+import image3 from "../Images/shoes/image 3.svg";
+import image1 from "../Images/shoes/image 1.svg";
+import image2 from "../Images/shoes/image 2.svg";
+import image4 from "../Images/shoes/image 4.svg";
 
 const Container = () => {
-  const zoomIn = (n) => {
-    for (let i = 1; i <= 5; i++) {
-      if (i === n) {
+  const boxes = [
+    { id: 1, image: image4, color: "#e6e2d9" },
+    { id: 2, image: image2, color: "#64aedd" },
+    { id: 3, image: image1, color: "#42a3c7" },
+    { id: 4, image: image2, color: "#295eb4" },
+    { id: 5, image: image3, color: "#08214a" },
+  ];
+  const zoomIn = (id) => {
+    document.querySelector(`.box1-container${id}`).classList.add("slide-max");
+    boxes
+      .filter((box) => box.id !== id)
+      .forEach((box) =>
         document
-          .querySelector(`.box1-container${i}`)
-          .classList.add("slide-max");
-      } else {
-        document
-          .querySelector(`.box1-container${i}`)
-          .classList.add("slide-min");
-      }
-    }
+          .querySelector(`.box1-container${box.id}`)
+          .classList.add("slide-min")
+      );
   };
 
-  const zoomOut = (n) => {
-    for (let i = 1; i <= 5; i++) {
-      if (i === n) {
+  const zoomOut = (id) => {
+    document
+      .querySelector(`.box1-container${id}`)
+      .classList.remove("slide-max");
+    boxes
+      .filter((box) => box.id !== id)
+      .forEach((box) =>
         document
-          .querySelector(`.box1-container${i}`)
-          .classList.remove("slide-max");
-      } else {
-        document
-          .querySelector(`.box1-container${i}`)
-          .classList.remove("slide-min");
-      }
-    }
+          .querySelector(`.box1-container${box.id}`)
+          .classList.remove("slide-min")
+      );
   };
   return (
-    <>
-      <section className="New-Arrival">
-        <div className="box1">
+    <section className="New-Arrival">
+      <div className="box1">
+        {boxes.map((box) => (
           <div
-            className="box1-container1"
-            onMouseEnter={() => zoomIn(1)}
-            onMouseLeave={() => zoomOut(1)}
-            style={{ backgroundColor: "#e6e2d9" }}
+            key={box.id}
+            className={`box1-container${box.id}`}
+            onMouseEnter={() => zoomIn(box.id)}
+            onMouseLeave={() => zoomOut(box.id)}
+            style={{ backgroundColor: box.color }}
           >
-            <h1 className="subheading1">JORDAN</h1>
-            <img src={image5} alt="" />
+            <img src={box.image} alt="" />
           </div>
-          <div
-            className="box1-container2"
-            onMouseEnter={() => zoomIn(2)}
-            onMouseLeave={() => zoomOut(2)}
-            style={{ backgroundColor: "#64aedd" }}
-          >
-            <h1 className="subheading2">JORDAN</h1>
-            <img src={image3} alt="" />
-          </div>
-          <div
-            className="box1-container3"
-            onMouseEnter={() => zoomIn(3)}
-            onMouseLeave={() => zoomOut(3)}
-            style={{ backgroundColor: "#42a3c7" }}
-          >
-            <h1 className="subheading3">JORDAN</h1>
-            <img src={image2} alt="" />
-          </div>
-          <div
-            className="box1-container4"
-            onMouseEnter={() => zoomIn(4)}
-            onMouseLeave={() => zoomOut(4)}
-            style={{ backgroundColor: "#295eb4" }}
-          >
-            <h1 className="subheading4">JORDAN</h1>
-            <img src={image3} alt="" />
-          </div>
-          <div
-            className="box1-container5"
-            onMouseEnter={() => zoomIn(5)}
-            onMouseLeave={() => zoomOut(5)}
-            style={{ backgroundColor: "#08214a" }}
-          >
-            <h1 className="subheading5">JORDAN</h1>
-            <img src={image4} alt="" />
-          </div>
-        </div>
-      </section>
-    </>
+        ))}
+      </div>
+    </section>
   );
 };
 

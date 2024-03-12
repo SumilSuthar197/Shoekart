@@ -7,29 +7,37 @@ import b2 from "../Images/b2.webp";
 import b3 from "../Images/b3.webp";
 import b4 from "../Images/b4.webp";
 import b5 from "../Images/b5.webp";
-import products from "../Data";
+import { featuredProducts, trendingProducts } from "../Data";
 import Card from "../components/Card";
 import Container from "../components/Container";
 import Countdown from "../components/Countdown";
 import "../styles/landingpage.css";
 
 const LandingPage = () => {
+
   return (
     <>
       <section className="main-Container">
-        <p className="p1">THE NEW 2023</p>
+        <p className="p1">THE NEW {new Date().getFullYear()}</p>
         <p className="p2">AIR JORDAN</p>
-        <p className="p3">UNWRAP POSSIBILITIES</p>
-        <img className="main-img" src={image1} alt="First slide" />
+        <div className="main-img-cont">
+          <img className="main-img" src={image1} alt="First slide" />
+          <p className="p3">
+            <span>UNWRAP</span>
+            <span> POSSIBILITIES</span>
+          </p>
+        </div>
+        <p className="p4">UNWRAP POSSIBILITIES</p>
+      </section>
+
+      <section id="trending" className="title">
+        <h1>Who You Are Shopping For?</h1>
       </section>
 
       <section className="shopping-gender">
-        <h1>Who You Are Shopping For?</h1>
-        <div className="shopping-gender-img">
-          <img src={men} alt="" />
-          <img src={women} alt="" />
-          <img src={kid} alt="" />
-        </div>
+        <img src={men} alt="" />
+        <img src={women} alt="" />
+        <img src={kid} alt="" />
       </section>
 
       <section id="trending" className="title">
@@ -39,41 +47,68 @@ const LandingPage = () => {
 
       <Container />
 
-      <section className="title">
+      <section id="featuredProd" className="title">
         <h1>Featured Products</h1>
         <h2>The new modern design summer collection</h2>
       </section>
 
       <section className="Featured-products">
         <div className="product-container">
-          {products.map((item) => {
+          {featuredProducts.map((item) => {
             return <Card key={item.id} {...item} />;
           })}
         </div>
       </section>
 
-      <Countdown Date={"October 5, 2023 12:00:00"} />
+      <Countdown Date={"October 5, 2024 12:00:00"} />
 
-      <br />
-      <br />
+      <section className="title">
+        <h1>Hot Deal On Sales</h1>
+        <h2>The new modern design summer collection</h2>
+      </section>
+
+      <section className="Featured-products">
+        <div className="product-container">
+          {trendingProducts.map((item) => {
+            return <Card key={item.id} {...item} />;
+          })}
+        </div>
+      </section>
+
       <section className="features">
         <div className="features-icon">
-          <img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/70/null/external-quality-logistic-delivery-kiranshastry-lineal-kiranshastry.png" />
-          <br />
-          <h5>100% ORIGINAL GUARANTEE</h5>
+          <div>
+            <img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/70/null/external-quality-logistic-delivery-kiranshastry-lineal-kiranshastry.png" />
+          </div>
+          {/* <br /> */}
+          <div>
+            <h5>100% ORIGINAL GUARANTEE</h5>
+          </div>
         </div>
         <div className="features-icon">
-          <img src="https://img.icons8.com/ios/64/null/security-checked--v1.png" />
-          <h5>100% SECURE PAYMENT</h5>
+          <div>
+            <img src="https://img.icons8.com/ios/64/null/security-checked--v1.png" />
+          </div>
+          <div>
+            <h5>100% SECURE PAYMENT</h5>
+          </div>
         </div>
         <div className="features-icon">
-          <img src="https://img.icons8.com/external-konkapp-detailed-outline-konkapp/74/null/external-fast-delivery-logistic-and-delivery-konkapp-detailed-outline-konkapp.png" />
-          <h5>DELIVERY WITHIN 48 HOURS</h5>
+          <div>
+            <img src="https://img.icons8.com/external-konkapp-detailed-outline-konkapp/74/null/external-fast-delivery-logistic-and-delivery-konkapp-detailed-outline-konkapp.png" />
+          </div>
+          <div>
+            <h5>DELIVERY WITHIN 48 HOURS</h5>
+          </div>
         </div>
         <div className="features-icon">
-          <img src="https://img.icons8.com/external-victoruler-outline-victoruler/64/null/external-return-box-logistics-victoruler-outline-victoruler.png" />
-          <br />
-          <h5>RETURN WITHIN 30 DAYS</h5>
+          <div>
+            <img src="https://img.icons8.com/external-victoruler-outline-victoruler/64/null/external-return-box-logistics-victoruler-outline-victoruler.png" />
+          </div>
+          {/* <br /> */}
+          <div>
+            <h5>RETURN WITHIN 30 DAYS</h5>
+          </div>
         </div>
       </section>
 
