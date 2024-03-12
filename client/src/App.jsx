@@ -16,7 +16,7 @@ import Product from "./pages/Product";
 import HomeLayout from "./pages/HomeLayout";
 // import { useEffect } from "react";
 import LoginPage from "./pages/LoginPage";
-import SignUpPage from "./pages/SignupPage";
+import SignUpPage from "./pages/SignUpPage";
 import { useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 
