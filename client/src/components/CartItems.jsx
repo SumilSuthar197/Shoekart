@@ -1,5 +1,5 @@
-import { AiFillDelete, AiFillHeart } from "react-icons/Ai";
-import { HiMinusCircle, HiPlusCircle } from "react-icons/Hi";
+import { AiFillDelete, AiFillHeart } from "react-icons/ai";
+import { HiMinusCircle, HiPlusCircle } from "react-icons/hi";
 import { useDispatch } from "react-redux";
 import { removeItem, increase, decrease } from "../features/cart/cartslice";
 import { Link } from "react-router-dom";

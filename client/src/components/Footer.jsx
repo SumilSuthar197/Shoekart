@@ -5,7 +5,7 @@ import {
   FaYoutube,
   FaPhoneAlt,
 } from "react-icons/fa";
-import { IoIosMail } from "react-icons/Io";
+import { IoIosMail } from "react-icons/io";
 const Footer = () => {
   return (
     <>
