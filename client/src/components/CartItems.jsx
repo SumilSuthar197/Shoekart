@@ -1,5 +1,5 @@
-import { AiFillDelete, AiFillHeart } from "react-icons/ai";
-import { HiMinusCircle, HiPlusCircle } from "react-icons/hi";
+// import { AiFillDelete, AiFillHeart } from "react-icons/ai";
+// import { HiMinusCircle, HiPlusCircle } from "react-icons/hi";
 import { useDispatch } from "react-redux";
 import { removeItem, increase, decrease } from "../features/cart/cartslice";
 import { Link } from "react-router-dom";
@@ -23,10 +23,10 @@ const CartItems = (Data) => {
                   dispatch(removeItem(Data.id));
                 }}
               >
-                <AiFillDelete /> Remove item
+                {/* <AiFillDelete /> Remove item */}
               </button>
               <button className="cartPageBtn1">
-                <AiFillHeart /> Move to favorite
+                {/* <AiFillHeart /> Move to favorite */}
               </button>
             </div>
           </span>
@@ -43,7 +43,7 @@ const CartItems = (Data) => {
               dispatch(decrease(Data.id));
             }}
           >
-            <HiMinusCircle />
+            {/* <HiMinusCircle /> */}
           </button>{" "}
           {Data.inCart}{" "}
           <button
@@ -51,7 +51,7 @@ const CartItems = (Data) => {
               dispatch(increase(Data.id));
             }}
           >
-            <HiPlusCircle />
+            {/* <HiPlusCircle /> */}
           </button>
         </h5>
         <h5 className="cTotal">${Data.inCart * Data.price} </h5>

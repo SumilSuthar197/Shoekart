@@ -14,6 +14,12 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      if (user.email === "" || user.password === "") {
+        toast.error("Please provide email and password", {
+          position: "bottom-right",
+        });
+        return;
+      }
       const response = await Axios.post("/login", user);
       console.log(response);
 

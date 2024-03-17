@@ -12,7 +12,6 @@ const getAllProducts = asyncErrorHandler(async (req, res, next) => {
 });
 
 const getProducts = asyncErrorHandler(async (req, res, next) => {
-  console.log(req.query);
   const page = parseInt(req.query.page) - 1 || 0;
   const limit = parseInt(req.query.limit) || 12;
   const search = req.query.search || "";
@@ -20,7 +19,7 @@ const getProducts = asyncErrorHandler(async (req, res, next) => {
   const colors = req.query.color;
   const sizes = req.query.size;
   const priceRange = req.query.price;
-  console.log(sizes, colors);
+
   const query = {
     name: { $regex: search, $options: "i" },
     price: {
@@ -67,6 +66,20 @@ const getProducts = asyncErrorHandler(async (req, res, next) => {
     products,
     colorOptions,
     brandOptions,
+  });
+});
+
+const getProduct = asyncErrorHandler(async (req, res, next) => {
+  const { slug } = req.params;
+
+  const productExists = await product.findOne({ slug, isActive: true });
+  if (!productExists) {
+    return next(new errorHandler("No such product exist", 404));
+  }
+
+  return res.status(200).json({
+    success: true,
+    data: productExists,
   });
 });
 
@@ -137,5 +150,6 @@ const getFilterOptions = asyncErrorHandler(async (req, res, next) => {
 module.exports = {
   createProduct,
   getProducts,
+  getProduct,
   getFilterOptions,
 };

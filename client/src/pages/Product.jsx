@@ -7,6 +7,7 @@ import useDebounce from "../../hooks/useDebounce";
 import Axios from "../Axios";
 import Pagination from "./Pagination";
 import FilterModal from "../components/FilterModal";
+import TriangleLoader from "../components/TriangleLoader";
 
 const Product = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -55,6 +56,7 @@ const Product = () => {
   const gotoPage = (page) => {
     setCurrentPage(page);
   };
+  // if (loading) return <TriangleLoader height="300px" />;
   return (
     <>
       <div className="Header_title search_header">
@@ -92,22 +94,28 @@ const Product = () => {
           />
         )}
       </div>
-      <section className="Featured-products featured-div">
-        <div className="product-container">
-          {products.map((item) => {
-            return <Card key={item._id} {...item} />;
-          })}
-        </div>
-      </section>
-      <Pagination
-        totalPageCount={totalPages}
-        canPreviousPage={canPreviousPage}
-        previousPage={() => setCurrentPage(currentPage - 1)}
-        canNextPage={canNextPage}
-        nextPage={() => setCurrentPage(currentPage + 1)}
-        gotoPage={gotoPage}
-        pageIndex={currentPage - 1}
-      />
+      {loading ? (
+        <TriangleLoader height="300px" />
+      ) : (
+        <>
+          <section className="Featured-products featured-div">
+            <div className="product-container">
+              {products.map((item) => {
+                return <Card key={item._id} {...item} />;
+              })}
+            </div>
+          </section>
+          <Pagination
+            totalPageCount={totalPages}
+            canPreviousPage={canPreviousPage}
+            previousPage={() => setCurrentPage(currentPage - 1)}
+            canNextPage={canNextPage}
+            nextPage={() => setCurrentPage(currentPage + 1)}
+            gotoPage={gotoPage}
+            pageIndex={currentPage - 1}
+          />
+        </>
+      )}
     </>
   );
 };

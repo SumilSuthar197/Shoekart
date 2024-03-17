@@ -7,7 +7,7 @@ import {
   // createBrowserRouter,
 } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
-import ProductDetails from "./components/ProductDetails";
+import ProductDetails from "./pages/ProductDetails";
 // import { loader as singleProductLoader } from "./components/ProductDetails";
 // import { useEffect } from "react";
 import CartLayout from "./pages/CartLayout";
@@ -19,6 +19,7 @@ import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import { useEffect } from "react";
 import useAuth from "../hooks/useAuth";
+import ErrorPage from "./pages/ErrorPage";
 
 // const router = createBrowserRouter([
 //   {
@@ -90,7 +91,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<HomeLayout />}>
           <Route index element={<LandingPage />} />
-          <Route path="product/:id" element={<ProductDetails />} />
+          <Route path="product/:slug" element={<ProductDetails />} />
           <Route path="about" element={<h1>hello</h1>} />
           <Route path="products" element={<Product />} />
           <Route path="cart" element={<CartLayout />} />
@@ -98,6 +99,7 @@ const App = () => {
         </Route>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
   );

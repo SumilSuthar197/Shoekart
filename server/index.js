@@ -12,6 +12,7 @@ app.use(express.json());
 // import routes
 const userRoute = require("./routes/user");
 const productRoute = require("./routes/product");
+const cartRoute = require("./routes/cart");
 
 app.get("/", (req, res) => {
   res.json("Hello World");
@@ -20,6 +21,7 @@ app.get("/", (req, res) => {
 //using routes
 app.use("/api/v1/", userRoute);
 app.use("/api/v1/product", productRoute);
+app.use("/api/v1/cart", cartRoute);
 
 app.get("*", (req, res) => {
   //   res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
@@ -32,7 +34,7 @@ app.use(errorHandlerMiddleware);
 const port = process.env.PORT || 5000;
 const StartServer = async () => {
   try {
-    app.listen(port, () => {
+    app.listen(port, "0.0.0.0", () => {
       console.log(`Server is running on http://localhost:${port}`);
     });
 

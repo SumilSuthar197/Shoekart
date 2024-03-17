@@ -53,11 +53,11 @@ const LandingPage = () => {
       </section>
 
       <section className="Featured-products">
-        <div className="product-container">
+        {/* <div className="product-container">
           {featuredProducts.map((item) => {
             return <Card key={item.id} {...item} />;
           })}
-        </div>
+        </div> */}
       </section>
 
       <Countdown Date={"October 5, 2024 12:00:00"} />
@@ -68,11 +68,11 @@ const LandingPage = () => {
       </section>
 
       <section className="Featured-products">
-        <div className="product-container">
+        {/* <div className="product-container">
           {trendingProducts.map((item) => {
             return <Card key={item.id} {...item} />;
           })}
-        </div>
+        </div> */}
       </section>
 
       <section className="features">

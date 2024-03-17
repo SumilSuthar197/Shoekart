@@ -5,9 +5,11 @@ const {
   createProduct,
   getProducts,
   getFilterOptions,
-} = require("../controllers/productController");
+  getProduct,
+} = require("../controllers/product");
 router.route("/create").post(createProduct);
 router.route("/filter").get(getProducts);
 router.route("/filterOptions").get(getFilterOptions);
+router.route("/:slug").get(getProduct);
 
 module.exports = router;

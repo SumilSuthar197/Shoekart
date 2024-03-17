@@ -18,7 +18,7 @@ root.render(
     <Provider store={store}>
       <AuthProvider>
         <App />
-        <ToastContainer />
+        <ToastContainer position="bottom-right" />
       </AuthProvider>
     </Provider>
 

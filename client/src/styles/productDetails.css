@@ -1,18 +1,13 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
-
 .product-bg {
   display: flex;
   padding: 4% 3% 5%;
 }
-.product-bg .pImages {
+.product-bg .prod-images-cont {
   display: flex;
-  width: calc(52%);
+  width: 52%;
   flex-direction: column;
 }
 .prod-image {
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
   background-color: #e5e5e5;
   height: 480px;
   overflow: hidden;
@@ -41,7 +36,6 @@
   height: 200px;
   overflow: hidden;
 }
-
 .prod-details-cont {
   font-family: "Inter", sans-serif;
   color: rgb(30, 41, 59);
@@ -60,19 +54,9 @@
 }
 .prod-details-cont .pprize span {
   font-size: 13px;
-  text-decoration: line-through;
-  color: #64748b;
-  text-decoration-color: #64748b;
-  text-decoration-thickness: 2px;
-}
-.prod-details-cont .ptax {
-  font-size: 13px;
-  font-weight: 500;
-  margin-top: -15px;
-  margin-bottom: 10px;
+  text-decoration: 2px line-through #64748b;
   color: #64748b;
 }
-
 .prod-details-cont select {
   font-family: "League Spartan", "Poppins", sans-serif;
   font-size: 15px;
@@ -83,8 +67,7 @@
 }
 .prod-details-cont .add-to-carts {
   padding: 10px 20px;
-  margin-bottom: 20px;
-  margin-left: 15px;
+  margin: 0 0 20px 15px;
   color: white;
   font-weight: 600;
   border-radius: 3px;
@@ -94,39 +77,30 @@
   border: 1px solid #54bab9;
   cursor: pointer;
 }
-.prod-details-cont .add-to-carts:hover {
+.prod-details-cont .add-to-carts:hover,
+.pincode-check:hover {
   background-color: #e8f6ea;
   color: #54bab9;
 }
-
 .prod-details-cont .pDescTitle {
   font-size: 17px;
-  margin: 5px 0 5px;
+  margin: 5px 0;
 }
 .prod-details-cont p {
-  font-size: 13px;
+  font-size: 14px;
   margin-bottom: 20px;
 }
-
-.prod-details-cont div {
+.prod-details-cont > div {
   position: relative;
   outline: none;
   margin: 5px 0 20px;
 }
-
-.prod-details-cont .prodInputCont {
-  position: relative;
-}
-
 .prod-details-cont input {
-  padding: 5px 10px;
-  width: 50%;
-}
-
-.prod-details-cont div input {
   border: 1px solid #1a1a1a;
   outline: none;
   height: 32px;
+  padding: 5px 10px;
+  width: 50%;
   border-right-width: 0;
 }
 .prod-details-cont div h5 {
@@ -146,43 +120,73 @@
   outline: none;
   cursor: pointer;
 }
-.pincode-check:hover {
-  background-color: #e8f6ea;
-  color: #54bab9;
-}
 .prod-details-cont ul {
   padding: 0;
 }
 .prod-details-cont li {
-  font-size: 13px;
-  color: #1a1a1a;
+  font-size: 14px;
   padding: 2px 0;
 }
 
+.ratingContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  border: 1px #2b2b2b solid;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+.ratingUpperDiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #2b2b2b;
+  padding: 5px;
+}
+.ratingInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+.ratingProfile {
+  font-size: 28px;
+}
+.ratingName {
+  display: flex;
+  flex-direction: column;
+}
+.ratingName span {
+  font-size: 0.75rem;
+}
+.ratingStarCont {
+  color: #fbbf24;
+  font-size: 16px;
+  font-weight: 600;
+}
+.ratingPara {
+  height: max-content;
+}
+.ratingPara p {
+  margin: 0;
+  padding: 6px 5px 3px;
+}
 @media only screen and (max-width: 850px) {
   .product-bg {
-    display: flex;
     flex-direction: column;
   }
-  .product-bg .pImages {
-    display: flex;
-    width: calc(95%);
-    flex-direction: column;
+  .product-bg .prod-images-cont {
+    width: 95%;
     margin: 0 3%;
   }
   .prod-image {
     height: 400px;
   }
-  .prod-image:hover img {
-    transform: scale(1.2);
-  }
   .prod-image img {
-    height: 480px;
-    width: 100%;
-    transition: transform 3s;
+    height: -webkit-fill-available;
   }
   .pRow img {
-    height: 150px;
+    height: -webkit-fill-available;
   }
   .prod-details-cont {
     margin-top: 30px;
@@ -193,14 +197,6 @@
   }
   .prod-details-cont .pprize {
     font-size: 20px;
-    padding: 5px 0 14px;
-  }
-  .prod-details-cont .pprize span {
-    font-size: 13px;
-    text-decoration: line-through;
-    color: #64748b;
-    text-decoration-color: #64748b;
-    text-decoration-thickness: 2px;
   }
 }
 
@@ -211,12 +207,6 @@
   .prod-image:hover img {
     transform: scale(1);
   }
-  .prod-image img {
-    height: -webkit-fill-available;
-  }
-  .pRow img {
-    height: -webkit-fill-available;
-  }
   .prod-details-cont {
     margin-top: 20px;
   }
@@ -225,10 +215,9 @@
   }
   .prod-details-cont .pprize {
     font-size: 19px;
-    padding: 3px 0 14px;
   }
   .pRow {
-    margin-top: 10px;
+    margin-top: 8px;
   }
   .prod-details-cont input {
     width: 72%;

@@ -54,13 +54,16 @@ const login = asyncErrorHandler(async (req, res, next) => {
     }
   );
 
+  const cartSize = userExists.cart.items.reduce((a, p) => {
+    return a + p.qty;
+  }, 0);
   res.status(200).json({
     success: true,
     message: "User logged in successfully",
     user: {
       name: userExists.name,
       email: userExists.email,
-      role: userExists.role,
+      cartSize,
       token,
     },
   });

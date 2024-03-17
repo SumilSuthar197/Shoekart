@@ -93,6 +93,7 @@ const FilterModal = ({
               value={filters.price.minPrice}
               className="price-input"
               placeholder="0"
+              min={0}
               onChange={(e) =>
                 changeFilter({
                   price: {
@@ -111,6 +112,7 @@ const FilterModal = ({
               value={filters.price.maxPrice}
               className="price-input"
               placeholder="Infinity"
+              min={0}
               onChange={(e) =>
                 changeFilter({
                   price: {

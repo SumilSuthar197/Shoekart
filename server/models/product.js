@@ -60,12 +60,12 @@ const productSchema = new mongoose.Schema(
     color: {
       type: String,
       lowercase: true,
-      trim: true, 
+      trim: true,
       required: [true, "Please provide a color"],
     },
     material: {
       type: String,
-      lowercase: true,  
+      lowercase: true,
       trim: true,
     },
     isActive: {
@@ -75,8 +75,9 @@ const productSchema = new mongoose.Schema(
     ratings: [
       {
         name: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "User",
+          type: String,
+          // ref: "User",
+          default: "Anonymous",
         },
         rating: {
           type: Number,
@@ -84,6 +85,10 @@ const productSchema = new mongoose.Schema(
         review: {
           type: String,
           trim: true,
+        },
+        date: {
+          type: Date,
+          default: Date.now,
         },
       },
     ],

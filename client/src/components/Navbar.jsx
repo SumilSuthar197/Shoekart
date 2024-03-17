@@ -16,6 +16,7 @@ const Navbar = () => {
     trendingSection.scrollIntoView({ behavior: "smooth" });
   };
   const { auth } = useAuth();
+  // console.log(auth.cartSize);
   const [isOpen, setIsOpen] = useState(false);
   const { amount, cartItem } = useSelector((store) => store.cart);
   const dispatch = useDispatch();
@@ -101,7 +102,7 @@ const Navbar = () => {
           <div className="btnIcon">
             <Link to="/cart" style={{ color: "#1a1a1a" }}>
               <FaShoppingCart />
-              <div className="navAmount">{amount}</div>
+              <div className="navAmount">{auth?.cartSize || 0}</div>
             </Link>
           </div>
           <div className="btnIcon">
