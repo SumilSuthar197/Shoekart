@@ -8,7 +8,6 @@ import useAuth from "../../hooks/useAuth";
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  // const {}
   const { setAuth } = useAuth();
   const [user, setUser] = useState({ email: "", password: "", role: "user" });
   const handleSubmit = async (e) => {
@@ -24,8 +23,7 @@ const LoginPage = () => {
       console.log(response);
 
       if (response.data.success === true) {
-        localStorage.setItem("jwt", "Bearer " + response.data.user.token);
-        localStorage.setItem("user", JSON.stringify(response.data.user));
+        localStorage.setItem("jwt", "Bearer " + response.data.token);
         setAuth(response.data.user);
         toast.success("Login successful. Access granted.", {
           position: "bottom-right",

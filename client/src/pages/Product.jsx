@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import "../styles/products.css";
 import Card from "../components/Card";
 import { useEffect, useState } from "react";
@@ -56,7 +55,6 @@ const Product = () => {
   const gotoPage = (page) => {
     setCurrentPage(page);
   };
-  // if (loading) return <TriangleLoader height="300px" />;
   return (
     <>
       <div className="Header_title search_header">

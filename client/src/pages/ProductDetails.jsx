@@ -32,42 +32,38 @@ const ProductDetails = () => {
   }, []);
 
   const handleAddToCart = async () => {
-    if (!auth) {
-      toast.error("Login required");
-      navigate("/login");
-      return;
-    }
-
-    if (!size) {
-      toast.error("Please select a size");
-    } else {
-      try {
-        const { cartSize, token } = auth;
-        const response = await Axios.post(
-          "/cart/add",
-          {
-            productId: data._id,
-            qty: 1,
-            size: Number(size),
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        toast.success(response?.data?.message);
-        setAuth({ ...auth, cartSize: cartSize + 1 });
-        localStorage.setItem(
-          "user",
-          JSON.stringify({ ...auth, cartSize: cartSize + 1 })
-        );
-      } catch (error) {
-        toast.error("Something went wrong", {
-          position: "bottom-right",
-        });
-        console.log(error);
+    try {
+      if (!auth) {
+        toast.error("Login required");
+        navigate("/login");
+        return;
       }
+
+      if (!size) {
+        toast.error("Please select a size");
+        return;
+      }
+      const token = localStorage.getItem("jwt");
+      const response = await Axios.post(
+        "/cart/add",
+        {
+          productId: data._id,
+          qty: 1,
+          size: Number(size),
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      toast.success(response?.data?.message);
+      setAuth({ ...auth, cartSize: auth.cartSize + 1 });
+    } catch (error) {
+      toast.error("Something went wrong", {
+        position: "bottom-right",
+      });
+      console.log(error);
     }
   };
   if (loading) return <TriangleLoader height="500px" />;

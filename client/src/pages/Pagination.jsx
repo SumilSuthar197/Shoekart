@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
 const Pagination = ({

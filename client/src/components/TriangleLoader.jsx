@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { Triangle } from "react-loader-spinner";
 
 const TriangleLoader = ({ height }) => {

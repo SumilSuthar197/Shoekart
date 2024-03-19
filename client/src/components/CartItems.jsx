@@ -1,63 +1,58 @@
-// import { AiFillDelete, AiFillHeart } from "react-icons/ai";
-// import { HiMinusCircle, HiPlusCircle } from "react-icons/hi";
-import { useDispatch } from "react-redux";
-import { removeItem, increase, decrease } from "../features/cart/cartslice";
+import { AiFillDelete, AiFillHeart } from "react-icons/ai";
+import { HiMinusCircle, HiPlusCircle } from "react-icons/hi";
 import { Link } from "react-router-dom";
+import { memo } from "react";
 
-const CartItems = (Data) => {
-  const dispatch = useDispatch();
+const CartItems = ({ data, qty, size, deleteItem }) => {
   return (
-    <div>
-      <div className="cartProduct">
-        <h5 className="cProduct-name">
-          <Link to={`/product/${Data.id}`} style={{ textDecoration: "none" }}>
-            <img src={Data.image} alt="image" />
-          </Link>
-          <span>
-            {Data.name}
-            <br />
-            <div className="cartItemDetails">
-              <button
-                className="cartPageBtn1"
-                onClick={() => {
-                  dispatch(removeItem(Data.id));
-                }}
-              >
-                {/* <AiFillDelete /> Remove item */}
+    <tr>
+      <td>
+        <div className="cart-product-cont">
+          <div className="cart-image-cont">
+            <Link
+              to={`/product/${data.slug}`}
+              style={{ textDecoration: "none" }}
+            >
+              <img src={data.image} alt="cart-img" />
+            </Link>
+          </div>
+          <div className="cart-name-cont">
+            <p style={{ textAlign: "left" }}>Nike {data.name}</p>
+            <div className="cart-name-cont-btn">
+              <button onClick={deleteItem}>
+                <AiFillDelete /> delete item
               </button>
-              <button className="cartPageBtn1">
-                {/* <AiFillHeart /> Move to favorite */}
+              <button>
+                <AiFillHeart /> move to favorite
               </button>
             </div>
-          </span>
-        </h5>
-        <h5 className="cSize">11</h5>
-        <h5 className="cPrice">${Data.price}</h5>
-        <h5 className="cQuantity">
-          <button
-            onClick={() => {
-              if (Data.inCart === 1) {
-                dispatch(removeItem(Data.id));
-                return;
-              }
-              dispatch(decrease(Data.id));
-            }}
-          >
-            {/* <HiMinusCircle /> */}
-          </button>{" "}
-          {Data.inCart}{" "}
-          <button
-            onClick={() => {
-              dispatch(increase(Data.id));
-            }}
-          >
-            {/* <HiPlusCircle /> */}
+          </div>
+        </div>
+        <div className="cart-mobile-info">
+          <p>Size: {size}</p>
+          <p>Quantity: {size}</p>
+          <p>Price: ₹ {data.price}/item</p>
+        </div>
+      </td>
+      <td className="cart-subheader">
+        <p>{size}</p>
+      </td>
+      <td className="td-qty cart-subheader">
+        <div>
+          <button>
+            <HiMinusCircle />
           </button>
-        </h5>
-        <h5 className="cTotal">${Data.inCart * Data.price} </h5>
-      </div>
-    </div>
+          <p>{qty}</p>
+          <button>
+            <HiPlusCircle />
+          </button>
+        </div>
+      </td>
+      <td className="cart-subheader">
+        <p>₹ {qty * data.price}</p>
+      </td>
+    </tr>
   );
 };
 
-export default CartItems;
+export default memo(CartItems);

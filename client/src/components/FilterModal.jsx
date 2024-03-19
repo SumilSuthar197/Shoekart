@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useRef } from "react";
 import MultiSelectBox from "./MultiSelectBox";
 const FilterModal = ({
@@ -28,7 +27,6 @@ const FilterModal = ({
   return (
     <div ref={modelRef} onClick={closeModal} className="modal">
       <div className="modal-container">
-        {/* <div className="modal-content"> */}
         <div className="modal-div">
           <h4>Sort By</h4>
           <div className="select-main-box">
@@ -144,7 +142,6 @@ const FilterModal = ({
               Apply
             </button>
           </div>
-          {/* </div> */}
         </div>
       </div>
     </div>

@@ -1,77 +1,41 @@
-import {
-  BrowserRouter,
-  Route,
-  // RouterProvider,
-  Routes,
-  // useLocation,
-  // createBrowserRouter,
-} from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import ProductDetails from "./pages/ProductDetails";
-// import { loader as singleProductLoader } from "./components/ProductDetails";
-// import { useEffect } from "react";
 import CartLayout from "./pages/CartLayout";
 import ContactPage from "./pages/ContactPage";
 import Product from "./pages/Product";
 import HomeLayout from "./pages/HomeLayout";
-// import { useEffect } from "react";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import { useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import ErrorPage from "./pages/ErrorPage";
-
-// const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <HomeLayout />,
-//     errorElement: <h1>error</h1>,
-//     children: [
-//       {
-//         index: true,
-//         element: <LandingPage />,
-//         errorElement: <h1>error</h1>,
-//         // loader: landingLoader(queryClient),
-//       },
-//       {
-//         path: "product/:id",
-//         loader: singleProductLoader(),
-//         element: <ProductDetails />,
-//       },
-//       {
-//         path: "about",
-//         element: <h1>hello</h1>,
-//       },
-//       {
-//         path: "products",
-//         element: <Product />,
-//       },
-//       {
-//         path: "cart",
-//         element: <CartLayout />,
-//       },
-//       {
-//         path: "contact",
-//         element: <ContactPage />,
-//       },
-//     ],
-//   },
-//   {
-//     path: "/login",
-//     element: <LoginPage />,
-//   },
-//   {
-//     path: "/signup",
-//     element: <SignUpPage />,
-//   },
-// ]);
+import Axios from "./Axios";
 
 const App = () => {
   const { setAuth } = useAuth();
   useEffect(() => {
-    const rememberedUser = localStorage.getItem("user");
-    if (rememberedUser) {
-      setAuth(JSON.parse(rememberedUser));
+    const rememberedUserToken = localStorage.getItem("jwt") || "";
+    const fetchUser = async () => {
+      try {
+        const response = await Axios.get("/verify", {
+          headers: { Authorization: rememberedUserToken },
+        });
+        if (response.data.success) {
+          setAuth(response.data.user);
+        }
+      } catch (error) {
+        setAuth(null);
+        if (error?.response?.status === 401) {
+          localStorage.removeItem("jwt");
+        }
+      }
+    };
+    if (rememberedUserToken === "") {
+      setAuth(null);
+      return;
+    } else {
+      fetchUser();
     }
   }, []);
   // useEffect(() => {
@@ -106,15 +70,3 @@ const App = () => {
 };
 
 export default App;
-
-// import Footer from "./components/Footer/Footer"
-// import Navbar from "./components/Navbar/Navbar"
-
-// function App() {
-//   return <div>
-//     <Navbar/>
-//     <Footer/>
-//   </div>
-// }
-
-// export default App

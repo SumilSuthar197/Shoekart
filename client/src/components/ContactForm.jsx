@@ -18,31 +18,43 @@ const ContactForm = () => {
       </form>
       <div className="people">
         <div>
-        <img src="https://secdatacom.no/wp-content/uploads/sites/3/2019/10/blank-profile-male.jpg" alt="profile-photo" />
+          <img
+            src="https://secdatacom.no/wp-content/uploads/sites/3/2019/10/blank-profile-male.jpg"
+            alt="profile-photo"
+          />
           <p>
-            <span>Sumil Suthar</span>Senior Marketing Manager <br />
-            Email: sumil@hevc.in
+            <span>Sumil Suthar</span>Software Engineer <br />
+            sumil.suthar@gmail.com
           </p>
         </div>
         <div>
-          <img src="https://secdatacom.no/wp-content/uploads/sites/3/2019/10/blank-profile-male.jpg" alt="profile-photo" />
+          <img
+            src="https://secdatacom.no/wp-content/uploads/sites/3/2019/10/blank-profile-male.jpg"
+            alt="profile-photo"
+          />
           <p>
-            <span>John smilga</span>Senior Marketing Manager <br />
-            Email: john@hevc.in
+            <span>Sumil Suthar</span>Software Engineer <br />
+            sumil.suthar@gmail.com
           </p>
         </div>
         <div>
-        <img src="https://secdatacom.no/wp-content/uploads/sites/3/2019/10/blank-profile-male.jpg" alt="profile-photo" />
+          <img
+            src="https://secdatacom.no/wp-content/uploads/sites/3/2019/10/blank-profile-male.jpg"
+            alt="profile-photo"
+          />
           <p>
-            <span>David Malan</span>Senior Marketing Manager <br />
-            Email: david@hevc.in
+            <span>Sumil Suthar</span>Software Engineer <br />
+            sumil.suthar@gmail.com
           </p>
         </div>
         <div>
-        <img src="https://secdatacom.no/wp-content/uploads/sites/3/2019/10/blank-profile-male.jpg" alt="profile-photo" />
+          <img
+            src="https://secdatacom.no/wp-content/uploads/sites/3/2019/10/blank-profile-male.jpg"
+            alt="profile-photo"
+          />
           <p>
-            <span>Tom Cruise</span>Senior Marketing Manager <br />
-            Email: tom@hevc.in
+            <span>Sumil Suthar</span>Software Engineer <br />
+            sumil.suthar@gmail.com
           </p>
         </div>
         {/* <div>

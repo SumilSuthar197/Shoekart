@@ -5,9 +5,7 @@ import { FiSearch, FiMenu } from "react-icons/fi";
 import { FaShoppingCart } from "react-icons/fa";
 import { CgProfile, CgClose } from "react-icons/cg";
 import { BiLogIn } from "react-icons/bi";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { calculateTotals } from "../features/cart/cartslice";
+import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 
 const Navbar = () => {
@@ -16,13 +14,8 @@ const Navbar = () => {
     trendingSection.scrollIntoView({ behavior: "smooth" });
   };
   const { auth } = useAuth();
-  // console.log(auth.cartSize);
   const [isOpen, setIsOpen] = useState(false);
-  const { amount, cartItem } = useSelector((store) => store.cart);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(calculateTotals());
-  }, [cartItem, dispatch]);
+
   return (
     <div className="navigation-bar">
       <div
@@ -122,7 +115,7 @@ const Navbar = () => {
                 </ul>
               </>
             ) : (
-              <Link to="/login">
+              <Link to="/login" style={{ color: "#1a1a1a" ,fontSize:"30px"}}>
                 <BiLogIn />
               </Link>
             )}

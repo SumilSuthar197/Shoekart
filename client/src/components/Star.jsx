@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 
 const Star = ({ rating }) => {

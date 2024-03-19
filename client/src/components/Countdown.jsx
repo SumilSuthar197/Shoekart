@@ -13,7 +13,6 @@ const Countdown = () => {
     return date;
   }
   useEffect(() => {
-    // const countDownDate = new Date(prop.Date).getTime();
     const interval = setInterval(() => {
       const currentDate = new Date().getTime();
       const diff = countDownDate - currentDate;

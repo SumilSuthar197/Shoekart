@@ -1,15 +1,11 @@
-/* eslint-disable react-refresh/only-export-components */
 import { Link, useNavigate } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
-import { useDispatch } from "react-redux";
-import { addItem } from "../features/cart/cartslice";
 import Star from "./Star";
 import { memo } from "react";
 import { toast } from "react-toastify";
 import Axios from "../Axios";
 import useAuth from "../../hooks/useAuth";
 const Card = (data) => {
-  // const dispatch = useDispatch();
   const { auth, setAuth } = useAuth();
   const navigate = useNavigate();
   const toTitleCase = (word) => {
@@ -18,44 +14,43 @@ const Card = (data) => {
     return word.split(" ").map(letterCapitalizer).join(" ");
   };
   const handleAddToCart = async () => {
-    if (!auth) {
-      toast.error("Login required");
-      navigate("/login");
-      return;
-    }
-    const sizes = data.sizeQuantity.map((item) => item.size);
-    const size = window.prompt(
-      `Please enter your size\nAvailable sizes are UK ${sizes.join(", ")}:`
-    );
-    if (!size || !sizes.includes(Number(size))) {
-      toast.error("Please enter a valid size", {
-        position: "bottom-right",
-      });
-    } else {
-      try {
-        const { cartSize, token } = auth;
-        const response = await Axios.post(
-          "/cart/add",
-          {
-            productId: data._id,
-            qty: 1,
-            size: Number(size),
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        toast.success(response?.data?.message);
-        setAuth({ ...auth, cartSize: cartSize + 1 });
-        localStorage.setItem(
-          "user",
-          JSON.stringify({ ...auth, cartSize: cartSize + 1 })
-        );
-      } catch (error) {
-        toast.error("Something went wrong");
+    try {
+      if (!auth) {
+        toast.error("Login required");
+        navigate("/login");
+        return;
       }
+      const sizes = data.sizeQuantity.map((item) => item.size);
+      const size = window.prompt(
+        `Please enter your size\nAvailable sizes are UK ${sizes.join(", ")}:`
+      );
+      if (!size) {
+        return;
+      }
+      if (!size || !sizes.includes(Number(size))) {
+        toast.error("Please enter a valid size", {
+          position: "bottom-right",
+        });
+        return;
+      }
+      const token = localStorage.getItem("jwt");
+      const response = await Axios.post(
+        "/cart/add",
+        {
+          productId: data._id,
+          qty: 1,
+          size: Number(size),
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      toast.success(response?.data?.message);
+      setAuth({ ...auth, cartSize: auth.cartSize + 1 });
+    } catch (error) {
+      toast.error("Something went wrong");
     }
   };
 

@@ -7,14 +7,12 @@ import b2 from "../Images/b2.webp";
 import b3 from "../Images/b3.webp";
 import b4 from "../Images/b4.webp";
 import b5 from "../Images/b5.webp";
-import { featuredProducts, trendingProducts } from "../Data";
 import Card from "../components/Card";
 import Container from "../components/Container";
 import Countdown from "../components/Countdown";
 import "../styles/landingpage.css";
 
 const LandingPage = () => {
-
   return (
     <>
       <section className="main-Container">
@@ -80,7 +78,6 @@ const LandingPage = () => {
           <div>
             <img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/70/null/external-quality-logistic-delivery-kiranshastry-lineal-kiranshastry.png" />
           </div>
-          {/* <br /> */}
           <div>
             <h5>100% ORIGINAL GUARANTEE</h5>
           </div>
@@ -105,13 +102,11 @@ const LandingPage = () => {
           <div>
             <img src="https://img.icons8.com/external-victoruler-outline-victoruler/64/null/external-return-box-logistics-victoruler-outline-victoruler.png" />
           </div>
-          {/* <br /> */}
           <div>
             <h5>RETURN WITHIN 30 DAYS</h5>
           </div>
         </div>
       </section>
-
       <section className="banner">
         <div className="banner-row-1">
           <img src={b1} alt="Banner-Image" />

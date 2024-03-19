@@ -45,7 +45,6 @@ const login = asyncErrorHandler(async (req, res, next) => {
   if (!isMatch) {
     return next(new errorHandler("Invalid credentials", 401));
   }
-  // console.log(userExists);
   const token = jwt.sign(
     { id: userExists._id, email: userExists.email },
     secret,
@@ -64,12 +63,33 @@ const login = asyncErrorHandler(async (req, res, next) => {
       name: userExists.name,
       email: userExists.email,
       cartSize,
-      token,
     },
+    token,
   });
 });
 
+const verifyUser = asyncErrorHandler(async (req, res, next) => {
+  const token = req.headers.authorization.split(" ")[1];
+  if (!token) return next(new errorHandler("Token not found", 401));
+  const { id } = jwt.verify(token, secret);
+  const userObj = await user.findById(id);
+  if (!userObj) {
+    return next(new errorHandler("Invalid Token", 401));
+  }
+  const cartSize = userObj.cart.items.reduce((a, p) => {
+    return a + p.qty;
+  }, 0);
+  res.status(200).json({
+    success: true,
+    user: {
+      name: userObj.name,
+      email: userObj.email,
+      cartSize,
+    },
+  });
+});
 module.exports = {
   register,
   login,
+  verifyUser,
 };

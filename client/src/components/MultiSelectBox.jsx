@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
