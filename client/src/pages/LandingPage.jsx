@@ -11,8 +11,24 @@ import Card from "../components/Card";
 import Container from "../components/Container";
 import Countdown from "../components/Countdown";
 import "../styles/landingpage.css";
+import { useEffect, useState } from "react";
+import Axios from "../Axios";
+import TriangleLoader from "../components/TriangleLoader";
 
 const LandingPage = () => {
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await Axios.get("/product/featured");
+        setData(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <>
       <section className="main-Container">
@@ -44,34 +60,40 @@ const LandingPage = () => {
       </section>
 
       <Container />
+      {data?.featured && data.featured.length > 0 && (
+        <>
+          <section id="featuredProd" className="title">
+            <h1>Featured Products</h1>
+            <h2>The new modern design summer collection</h2>
+          </section>
 
-      <section id="featuredProd" className="title">
-        <h1>Featured Products</h1>
-        <h2>The new modern design summer collection</h2>
-      </section>
-
-      <section className="Featured-products">
-        {/* <div className="product-container">
-          {featuredProducts.map((item) => {
-            return <Card key={item.id} {...item} />;
-          })}
-        </div> */}
-      </section>
+          <section className="Featured-products">
+            <div className="product-container">
+              {data.featured.map((item) => {
+                return <Card key={item._id} {...item} />;
+              })}
+            </div>
+          </section>
+        </>
+      )}
 
       <Countdown Date={"October 5, 2024 12:00:00"} />
+      {data?.trending && data.trending.length > 0 && (
+        <>
+          <section className="title">
+            <h1>Hot Deal On Sales</h1>
+            <h2>The new modern design summer collection</h2>
+          </section>
 
-      <section className="title">
-        <h1>Hot Deal On Sales</h1>
-        <h2>The new modern design summer collection</h2>
-      </section>
-
-      <section className="Featured-products">
-        {/* <div className="product-container">
-          {trendingProducts.map((item) => {
-            return <Card key={item.id} {...item} />;
-          })}
-        </div> */}
-      </section>
+          <section className="Featured-products">
+            <div className="product-container">
+              {data.trending.map((item) => {
+                return <Card key={item._id} {...item} />;
+              })}
+            </div>
+          </section>
+        </>
+      )}
 
       <section className="features">
         <div className="features-icon">

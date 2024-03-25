@@ -179,10 +179,25 @@ const updateReview = asyncErrorHandler(async (req, res, next) => {
   });
 });
 
+const getFeaturedProducts = asyncErrorHandler(async (req, res, next) => {
+  const featured = await product
+    .find({ isActive: true, isFeatured: true })
+    .limit(8);
+  const trending = await product
+    .find({ isActive: true })
+    .sort({ price: 1 })
+    .limit(4);
+  res.status(200).json({
+    success: true,
+    featured,
+    trending,
+  });
+});
 module.exports = {
   createProduct,
   getProducts,
   getProduct,
   getFilterOptions,
   updateReview,
+  getFeaturedProducts,
 };

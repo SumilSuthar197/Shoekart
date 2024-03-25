@@ -29,7 +29,7 @@ const MyOrders = () => {
     }
   };
   const openReviewModal = (status, id1, id2) => {
-    if (status !== "Delivered") {
+    if (status.toLowerCase() !== "delivered") {
       toast.error("You can only review delivered products.");
       return;
     }
@@ -126,11 +126,7 @@ const MyOrders = () => {
                               : {}
                           }
                           onClick={() =>
-                            openReviewModal(
-                              product.delivered,
-                              product.id,
-                              item.id
-                            )
+                            openReviewModal(item.delivered, product.id, item.id)
                           }
                         >
                           {product.isReviewed ? "Reviewed" : "Review"}

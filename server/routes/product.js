@@ -6,8 +6,10 @@ const {
   getFilterOptions,
   getProduct,
   updateReview,
+  getFeaturedProducts,
 } = require("../controllers/product");
 const { verifyToken } = require("../middleware/auth");
+router.route("/featured").get(getFeaturedProducts);
 router.route("/create").post(createProduct);
 router.route("/filter").get(getProducts);
 router.route("/filterOptions").get(getFilterOptions);
