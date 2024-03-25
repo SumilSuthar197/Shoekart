@@ -1,10 +1,5 @@
 const mongoose = require("mongoose");
 const slug = require("mongoose-slug-generator");
-// const options = {
-//   separator: "-",
-//   lang: "en",
-//   truncate: 120,
-// };
 
 mongoose.plugin(slug);
 
@@ -76,7 +71,6 @@ const productSchema = new mongoose.Schema(
       {
         name: {
           type: String,
-          // ref: "User",
           default: "Anonymous",
         },
         rating: {
@@ -92,6 +86,7 @@ const productSchema = new mongoose.Schema(
         },
       },
     ],
+    ratingScore: { type: Number, default: 0 },
   },
   { timestamps: true }
 );

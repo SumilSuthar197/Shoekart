@@ -7,21 +7,26 @@ const errorHandlerMiddleware = require("./middleware/error");
 
 app.use(cors());
 app.use(express.static("./public"));
-app.use(express.json());
 
 // import routes
 const userRoute = require("./routes/user");
 const productRoute = require("./routes/product");
 const cartRoute = require("./routes/cart");
+const paymentRoute = require("./routes/payments");
+const { webhook } = require("./controllers/payments");
+const { verifyToken } = require("./middleware/auth");
 
+app.post("/webhook", express.raw({ type: "application/json" }), webhook);
+app.use(express.json());
+
+//using routes
 app.get("/", (req, res) => {
   res.json("Hello World");
 });
-
-//using routes
+app.use("/api/v1/payment", paymentRoute);
 app.use("/api/v1/", userRoute);
 app.use("/api/v1/product", productRoute);
-app.use("/api/v1/cart", cartRoute);
+app.use("/api/v1/cart", verifyToken, cartRoute);
 
 app.get("*", (req, res) => {
   //   res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));

@@ -1,4 +1,4 @@
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import "../styles/navbar.css";
 import logo from "../assets/LOGO.svg";
 import { FiSearch, FiMenu } from "react-icons/fi";
@@ -13,7 +13,8 @@ const Navbar = () => {
     const trendingSection = document.getElementById("featuredProd");
     trendingSection.scrollIntoView({ behavior: "smooth" });
   };
-  const { auth } = useAuth();
+  const navigate = useNavigate();
+  const { auth, setAuth } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -104,18 +105,24 @@ const Navbar = () => {
                 <CgProfile />
                 <ul className="dropdown">
                   <li>
-                    <Link className="#">My Profile</Link>
+                    <Link to="/orders">Orders</Link>
                   </li>
                   <li>
-                    <Link className="#">Orders</Link>
-                  </li>
-                  <li>
-                    <Link className="#">Logout</Link>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        localStorage.removeItem("jwt");
+                        setAuth(null);
+                        navigate("/");
+                      }}
+                    >
+                      Logout
+                    </button>
                   </li>
                 </ul>
               </>
             ) : (
-              <Link to="/login" style={{ color: "#1a1a1a" ,fontSize:"30px"}}>
+              <Link to="/login" style={{ color: "#1a1a1a", fontSize: "30px" }}>
                 <BiLogIn />
               </Link>
             )}

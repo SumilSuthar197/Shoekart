@@ -6,6 +6,7 @@ import {
   FaPhoneAlt,
 } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
+import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <>
@@ -33,24 +34,24 @@ const Footer = () => {
               </p>
               <ul className="footer-social">
                 <li>
-                  <a href="/" target="_blank" rel="noopener noreferrer">
+                  <Link to="/" target="_blank" rel="noopener noreferrer">
                     <FaFacebook />
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/" target="_blank" rel="noopener noreferrer">
+                  <Link to="/" target="_blank" rel="noopener noreferrer">
                     <FaTwitter />
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/" target="_blank" rel="noopener noreferrer">
+                  <Link to="/" target="_blank" rel="noopener noreferrer">
                     <FaInstagram />
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/" target="_blank" rel="noopener noreferrer">
+                  <Link to="/" target="_blank" rel="noopener noreferrer">
                     <FaYoutube />
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -58,24 +59,24 @@ const Footer = () => {
               <h2>Support</h2>
               <ul>
                 <li>
-                  <a href="/" target="_blank" rel="noopener noreferrer">
+                  <Link to="/" target="_blank" rel="noopener noreferrer">
                     FAQ
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/" target="_blank" rel="noopener noreferrer">
+                  <Link to="/" target="_blank" rel="noopener noreferrer">
                     Privacy Policy
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/" target="_blank" rel="noopener noreferrer">
+                  <Link to="/" target="_blank" rel="noopener noreferrer">
                     Help
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/" target="_blank" rel="noopener noreferrer">
+                  <Link to="/" target="_blank" rel="noopener noreferrer">
                     Contact
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -83,24 +84,24 @@ const Footer = () => {
               <h2>Shop</h2>
               <ul>
                 <li>
-                  <a href="/" target="_blank" rel="noopener noreferrer">
+                  <Link to="/" target="_blank" rel="noopener noreferrer">
                     Men
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/" target="_blank" rel="noopener noreferrer">
+                  <Link to="/" target="_blank" rel="noopener noreferrer">
                     Women
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/" target="_blank" rel="noopener noreferrer">
+                  <Link to="/" target="_blank" rel="noopener noreferrer">
                     Kids
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/" target="_blank" rel="noopener noreferrer">
+                  <Link to="/" target="_blank" rel="noopener noreferrer">
                     Accessories
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -112,7 +113,7 @@ const Footer = () => {
                     <FaPhoneAlt />
                   </span>
                   <p>
-                    <a href="tel:+12345678900">+1 234 567 8900</a>
+                    <Link to="tel:+12345678900">+1 234 567 8900</Link>
                   </p>
                 </li>
                 <li>
@@ -120,23 +121,23 @@ const Footer = () => {
                     <IoIosMail />
                   </span>
                   <p>
-                    <a href="mailto:knowmore@nike.in">knowmore@nike.in</a>
+                    <Link to="mailto:knowmore@nike.in">knowmore@nike.in</Link>
                   </p>
                 </li>
               </ul>
             </div>
           </div>
           <div className="copyrightText">
-            <p>Copyright ©2023 NIKE</p>
+            <p>Copyright ©{new Date().getFullYear()} NIKE</p>
             <p>
               Made By{" "}
-              <a
-                href="https://www.linkedin.com/in/sumilsuthar/"
+              <Link
+                to="https://sumilsuthar.me/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Sumil Suthar
-              </a>
+              </Link>
             </p>
           </div>
         </div>

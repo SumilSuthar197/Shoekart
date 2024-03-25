@@ -1,18 +1,12 @@
-require("dotenv").config();
 const user = require("../models/user");
-const jwt = require("jsonwebtoken");
-const secret = process.env.JWT_SECRET;
 const asyncErrorHandler = require("../middleware/asyncErrorHandler");
 const errorHandler = require("../utils/errorHandler");
 const Product = require("../models/product");
 
 const getCart = asyncErrorHandler(async (req, res, next) => {
-  const token = req.headers.authorization.split(" ")[1];
-  if (!token) return next(new errorHandler("Token not found", 401));
-  const { id } = jwt.verify(token, secret);
-  const userObj = await user.findById(id).populate({
+  const userObj = await user.findById(req.tokenId).populate({
     path: "cart.items.productId",
-    select: "name price image slug",
+    select: "name price brand image slug",
   });
   if (!userObj) {
     return next(new errorHandler("Invalid Token", 401));
@@ -21,21 +15,21 @@ const getCart = asyncErrorHandler(async (req, res, next) => {
 });
 
 const addToCart = asyncErrorHandler(async (req, res, next) => {
-  const token = req.headers.authorization.split(" ")[1];
+  const id = req.tokenId;
   const { productId, size, qty } = req.body;
-  if (!token) return next(new errorHandler("Token not found", 401));
-  const { id } = jwt.verify(token, secret);
   const userObj = await user.findById(id);
 
   if (!userObj) {
     return next(new errorHandler("Invalid Token", 401));
   }
 
-  const productObj = await Product.findById(productId).select("price");
+  const productObj = await Product.findById(productId).select(
+    "price sizeQuantity"
+  );
   if (!productObj) {
     return next(new errorHandler("Invalid Product id", 404));
   }
-  
+
   const existingItem = userObj.cart.items.find(
     (item) => String(item.productId) === String(productId) && item.size === size
   );
@@ -53,13 +47,11 @@ const addToCart = asyncErrorHandler(async (req, res, next) => {
 });
 
 const deleteCart = asyncErrorHandler(async (req, res, next) => {
-  const token = req.headers.authorization.split(" ")[1];
+  const id = req.tokenId;
   const _id = req.params.id;
-  if (!token) return next(new errorHandler("Token not found", 401));
-  const { id } = jwt.verify(token, secret);
   const userObj = await user.findById(id).populate({
     path: "cart.items.productId",
-    select: "name price image slug",
+    select: "name price brand image slug",
   });
 
   if (!userObj) {
@@ -88,4 +80,50 @@ const deleteCart = asyncErrorHandler(async (req, res, next) => {
   });
 });
 
-module.exports = { addToCart, getCart, deleteCart };
+const updateCart = asyncErrorHandler(async (req, res, next) => {
+  const { cartId } = req.params;
+  const { qty } = req.body;
+  const id = req.tokenId;
+  const userObj = await user.findById(id).populate({
+    path: "cart.items.productId",
+    select: "name price brand image slug",
+  });
+
+  if (!userObj) {
+    return next(new errorHandler("Invalid Token", 401));
+  }
+
+  const itemToUpdate = userObj.cart.items.id(cartId);
+  if (!itemToUpdate) {
+    return next(new errorHandler("Item not found in cart", 404));
+  }
+  if (itemToUpdate.qty === qty) {
+    return res.status(200).json({ message: "Cart updated successfully" });
+  }
+  const productPrice = await Product.findById(itemToUpdate.productId).select(
+    "price"
+  );
+  if (!productPrice) {
+    return next(new errorHandler("Invalid Product id", 404));
+  }
+
+  if (qty <= 0) {
+    userObj.cart.totalPrice -= itemToUpdate.qty * productPrice.price;
+    userObj.cart.items = userObj.cart.items.filter(
+      (item) => String(item._id) !== String(cartId)
+    );
+  } else {
+    userObj.cart.totalPrice -= itemToUpdate.qty * productPrice.price;
+    itemToUpdate.qty = qty;
+    userObj.cart.totalPrice += itemToUpdate.qty * productPrice.price;
+  }
+
+  await userObj.save();
+
+  return res.status(200).json({
+    message: "Product added to cart successfully",
+    cart: userObj.cart,
+  });
+});
+
+module.exports = { addToCart, getCart, deleteCart, updateCart };

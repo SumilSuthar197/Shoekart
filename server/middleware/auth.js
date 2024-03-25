@@ -1,7 +1,7 @@
 const user = require("../models/user");
 const jwt = require("jsonwebtoken");
 const secret = process.env.JWT_SECRET;
-const asyncErrorHandler = require("../middleware/asyncErrorHandler");
+const asyncErrorHandler = require("./asyncErrorHandler");
 const errorHandler = require("../utils/errorHandler");
 
 const adminOnly = asyncErrorHandler(async (req, res, next) => {
@@ -16,4 +16,12 @@ const adminOnly = asyncErrorHandler(async (req, res, next) => {
   next();
 });
 
-module.exports = adminOnly;
+const verifyToken = asyncErrorHandler(async (req, res, next) => {
+  const token = req.headers.authorization.split(" ")[1];
+  if (!token) return next(new errorHandler("Token not found", 401));
+  const { id, email } = jwt.verify(token, secret);
+  req.tokenId = id;
+  req.tokenEmail = email;
+  next();
+});
+module.exports = { adminOnly, verifyToken };

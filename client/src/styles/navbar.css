@@ -122,7 +122,8 @@
     color: #54bab9;
   }
 }
-.dropdown li a {
+.dropdown li a,
+.dropdown li button {
   display: block;
   width: max-content;
   padding: 0.5rem 1rem;
@@ -130,7 +131,10 @@
   text-decoration: none;
   text-align: center;
   font-size: 16px;
+  background-color: #fff;
+  border: none;
   font-weight: 500;
+  cursor: pointer;
 }
 /* Newsletter */
 .subscription {

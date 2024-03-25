@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import TriangleLoader from "../components/TriangleLoader";
 import RatingCard from "../components/RatingCard";
 import useAuth from "../../hooks/useAuth";
+import Star from "../components/Star";
 
 const ProductDetails = () => {
   const { slug } = useParams();
@@ -84,6 +85,9 @@ const ProductDetails = () => {
         <h3 className="pprize">
           ${data.price} <span>$3000 </span>
         </h3>
+        <div className="pStar">
+          <Star rating={data.ratingScore / data.ratings.length || 0} />
+        </div>
         <select
           name="size"
           id="size"
@@ -164,7 +168,7 @@ const ProductDetails = () => {
         <div style={{ marginTop: "15px" }}>
           {data.ratings.length > 0 && (
             <>
-              <h3 className="pDescTitle">Rating</h3>
+              <h3 className="pDescTitle">Rating </h3>
               {data.ratings.map((data, index) => (
                 <RatingCard key={index} data={data} />
               ))}

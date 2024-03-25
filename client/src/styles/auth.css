@@ -96,7 +96,63 @@
   .login-box {
     padding: 8%;
   }
-  .login-form{
+  .login-form {
     gap: 1rem;
   }
 }
+.Error-cont {
+  display: flex;
+  padding: 4rem;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  background-color: #f7ecde;
+}
+.Error-div-center {
+  max-width: 40rem;
+  text-wrap: wrap;
+  text-align: center;
+}
+.Error-div-center > h2 {
+  margin-bottom: 1.5rem;
+  font-size: 10rem;
+  line-height: 1;
+  /* color: #4b5563; */
+  color: #414954;
+  font-weight: 800;
+}
+.Error-p1 {
+  font-size: 2rem;
+  line-height: 2rem;
+  color: #4b5563;
+  font-weight: 700;
+}
+.Error-p2 {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  color: #9ca3af;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+.Error-back-to-homepage {
+  padding: 0.75rem 2rem;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  background-color: #54bab9;
+  text-decoration: none;
+  color: #e8f6ea;
+  font-size: medium;
+}
+.Error-div-center .img{
+  margin-top: -17%;
+  margin-bottom: -12%;
+}
+.Error-div-center img {
+  height: 450px;
+  object-fit: contain;
+  @media screen and (max-width: 500px){
+    height: 350px;
+  }
+}
+

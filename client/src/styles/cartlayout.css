@@ -15,6 +15,9 @@
 .cart-container-1 {
   width: 70%;
 }
+.order-container-1 {
+  width: 100%;
+}
 .cart-table {
   min-width: 100%;
   line-height: 1.5;
@@ -144,11 +147,13 @@ tbody td p {
   padding-top: 0.8rem;
 }
 .couponInput {
+  color: #1a1a1a;
   padding: 0.8rem 0 1rem;
   width: 100%;
   position: relative;
   display: flex;
   gap: 0.5rem;
+  text-transform: uppercase;
 }
 .couponInput input {
   padding: 0.6rem;
@@ -157,6 +162,7 @@ tbody td p {
   outline: none;
   text-transform: uppercase;
   width: 100%;
+  font-weight: 600;
 }
 .couponInput button {
   background-color: red;
@@ -164,6 +170,27 @@ tbody td p {
   border-style: none;
   padding: 0.5rem 1.2rem;
   border-radius: 5px;
+}
+.couponInput .disabledBtn {
+  cursor: not-allowed;
+}
+.couponInput .disabledBtn:hover {
+  background-color: red;
+  color: white;
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+.couponInput .disabled {
+  background-color: #fff;
+  border: 2px solid green;
+  color: green;
+  /* font-weight: 6; */
+}
+.couponInput .disabled:hover {
+  background-color: #fff;
+  border: 2px solid green;
+  color: green;
+  cursor: not-allowed;
 }
 .cart-total {
   border-top: 2px #727272 solid;
@@ -187,6 +214,12 @@ tbody td p {
   color: red;
   background-color: white;
   border: 1px solid red;
+}
+.disabled:hover {
+  background-color: red;
+  color: white;
+  cursor: not-allowed;
+  opacity: 0.4;
 }
 .empty-cart {
   display: flex;

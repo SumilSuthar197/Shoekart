@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const secret = process.env.JWT_SECRET;
 const asyncErrorHandler = require("../middleware/asyncErrorHandler");
 const errorHandler = require("../utils/errorHandler");
+const order = require("../models/order");
 
 const register = asyncErrorHandler(async (req, res, next) => {
   const { name, email, password } = req.body;
@@ -88,8 +89,46 @@ const verifyUser = asyncErrorHandler(async (req, res, next) => {
     },
   });
 });
+
+const getOrder = asyncErrorHandler(async (req, res, next) => {
+  const token = req.headers.authorization.split(" ")[1];
+  if (!token) return next(new errorHandler("Token not found", 401));
+  const { id } = jwt.verify(token, secret);
+  const orderObj = await order.find({ userId: id }).populate({
+    path: "products.productId",
+    select: "name price brand image slug color",
+  });
+  // console.log(orderObj);
+  const formattedOrders = orderObj.map((order) => {
+    return {
+      id: order._id,
+      paymentId: order.paymentIntentId,
+      totalPrice: order.total,
+      delivered: order.delivery_status,
+      createdAt: order.createdAt,
+      items: order.products.map((item) => {
+        return {
+          id: item.productId._id,
+          name: `${item.productId.brand} ${item.productId.name}`,
+          price: item.productId.price,
+          image: item.productId.image,
+          color: item.productId.color,
+          slug: item.productId.slug,
+          qty: item.quantity,
+          size: item.size,
+          isReviewed: item.isReviewed,
+        };
+      }),
+    };
+  });
+  res.status(200).json({
+    success: true,
+    orders: formattedOrders.reverse(),
+  });
+});
 module.exports = {
   register,
   login,
   verifyUser,
+  getOrder,
 };

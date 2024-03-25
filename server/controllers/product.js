@@ -2,6 +2,8 @@ require("dotenv").config();
 const product = require("../models/product");
 const asyncErrorHandler = require("../middleware/asyncErrorHandler");
 const errorHandler = require("../utils/errorHandler");
+const order = require("../models/order");
+const user = require("../models/user");
 
 const getAllProducts = asyncErrorHandler(async (req, res, next) => {
   const products = await product.find({});
@@ -147,9 +149,40 @@ const getFilterOptions = asyncErrorHandler(async (req, res, next) => {
   });
 });
 
+const updateReview = asyncErrorHandler(async (req, res, next) => {
+  console.log("called");
+  const id = req.tokenId;
+  const { rating, review, productId, orderId } = req.body;
+  const userObj = await user.findById(id).select("name");
+  if (!userObj) {
+    return next(new errorHandler("Invalid Token", 401));
+  }
+  const productObj = await product.findById(productId);
+  if (!productObj) {
+    return next(new errorHandler("Invalid Product id", 404));
+  }
+  productObj.ratings.push({ rating, review, name: userObj.name });
+  productObj.ratingScore += rating;
+  await productObj.save();
+
+  const orderObj = await order.findById(orderId);
+  orderObj.products = orderObj.products.map((item) => {
+    if (String(item.productId) === String(productId)) {
+      item.isReviewed = true;
+    }
+    return item;
+  });
+  await orderObj.save();
+  return res.status(200).json({
+    success: true,
+    message: "Review added successfully",
+  });
+});
+
 module.exports = {
   createProduct,
   getProducts,
   getProduct,
   getFilterOptions,
+  updateReview,
 };

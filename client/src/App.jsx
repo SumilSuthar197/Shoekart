@@ -11,10 +11,15 @@ import { useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import ErrorPage from "./pages/ErrorPage";
 import Axios from "./Axios";
+import CheckoutSuccess from "./pages/CheckoutSuccess";
+import ProfileLayout from "./pages/ProfileLayout";
+import MyOrders from "./pages/MyOrders";
+import ProtectedRoute from "./utils/protectedRoute";
 
 const App = () => {
   const { setAuth } = useAuth();
   useEffect(() => {
+    console.log("App.js");
     const rememberedUserToken = localStorage.getItem("jwt") || "";
     const fetchUser = async () => {
       try {
@@ -61,8 +66,19 @@ const App = () => {
           <Route path="cart" element={<CartLayout />} />
           <Route path="contact" element={<ContactPage />} />
         </Route>
+        <Route
+          path="/orders"
+          element={
+            <ProtectedRoute>
+              <ProfileLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<MyOrders />} />
+        </Route>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
+        <Route path="checkout-success" element={<CheckoutSuccess />} />
         <Route path="/*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>

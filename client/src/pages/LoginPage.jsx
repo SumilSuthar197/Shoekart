@@ -35,6 +35,7 @@ const LoginPage = () => {
         });
       }
     } catch (error) {
+      console.log(error);
       toast.error(error.response.data.message, {
         position: "bottom-right",
       });
