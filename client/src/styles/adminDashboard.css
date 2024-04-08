@@ -1,0 +1,309 @@
+.dashPage {
+  display: flex;
+  flex-direction: row;
+  /* height: 100%; */
+  /* background-color: #f7f7f7; */
+  
+}
+.dashPage .dashSidebar {
+  background-color: #faebd7;
+  height: 100vh;
+  /* max-height: 100vh; */
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  transition: width 500ms ease-in-out;
+  overflow: hidden;
+  border-right: 1px solid #ccc;
+}
+.openSide {
+  width: 17%;
+}
+.closeSide {
+  width: 0%;
+}
+.sideBarLogoMain {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.6rem;
+}
+.sideBarLogo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+.sidebarCloseBtn {
+  display: none;
+}
+.sideBarLogo img {
+  width: 2.6rem;
+  aspect-ratio: 1;
+}
+.sideBarLogo > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0rem;
+}
+.sideBrandName {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+.sideBrandLink {
+  color: #1a1a1a;
+  font-size: 13px;
+  margin-top: -4px;
+}
+.sideItemLink {
+  cursor: pointer;
+  display: flex;
+  justify-items: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  color: #1a1a1a;
+  font-size: 15px;
+  font-weight: 500;
+}
+.sideItemLink:hover,
+.sideBrandLink:hover {
+  color: #54bab9;
+  transition: color 0.5s ease-in-out;
+}
+.sideItemIcon {
+  display: flex;
+}
+.sideItemName {
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sideItemList {
+  flex: 1 1 0%;
+  list-style: none;
+  padding: 1rem 0;
+}
+.dashPage .dashOutlet {
+  width: 100%;
+  height: 100vh;
+  transition: width 1s ease-in-out;
+}
+.mainHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  background-color: #faebd7;
+  border-bottom: 1px solid #ccc;
+  height: 3.5rem;
+}
+.mainHeader > div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 500;
+  font-size: 18px;
+}
+.SideBarBtn {
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s ease-in-out;
+}
+.adminHeaderProfile {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 500;
+  font-size: 16px;
+}
+.dashboardMain {
+  padding: 1rem 2rem;
+  max-height: 100%;
+}
+.dashboardMain h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 0.75rem;
+}
+.dashOverview {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+.dashCardMain {
+  display: flex;
+  /* background-color: white; */
+  border-radius: 1rem;
+  padding: 1.5rem 1.25rem;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  height: fit-content;
+  gap: 0.5rem;
+  background-color: #f3f4f6;
+  width: 100%;
+}
+.dashCardTitle {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+.dashCardAmount {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+.reactTableMain {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+.reactTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.reactTableTr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #f7f7f7;
+  min-width: max-content;
+  width: 100%;
+}
+.reactTableTh {
+  padding: 0.75rem 1.25rem;
+  font-size: 0.8rem;
+  line-height: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-align: center;
+  text-transform: uppercase;
+  text-align: left;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 12rem;
+  width: 100%;
+}
+.reactTableTd {
+  padding: 0.75rem 1.25rem;
+  font-size: 0.875rem;
+  text-align: left;
+  min-width: fit-content;
+  width: 100%;
+  border: none;
+  display: flex;
+}
+.reactTableSorted {
+  padding: 0.25rem 0.75rem;
+  display: flex;
+  width: max-content;
+}
+.admin-pagination-button {
+  padding: 0.55rem 1rem;
+  margin: 0.25rem;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  /* background-color: #e8f6ea; */
+  /* color: #54bab9; */
+  /* border: 1px solid #cce7d0; */
+  border: 1px solid #f7f7f7;
+  transition: background-color 0.3s, color 0.3s, transform 0.3s;
+  border-radius: 0.375rem;
+  cursor: pointer;
+}
+.admin-pagination-button:hover,
+.admin-pagination-button.active {
+  background-color: #54bab9;
+  color: #e8f6ea;
+}
+.admin-pagination-button:disabled {
+  cursor: not-allowed;
+  background-color: #f7f7f7;
+  color: #000;
+  opacity: 0.5;
+}
+.dashOverview form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.dashOverview form .inputs {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  gap: 1rem;
+}
+.dashOverview form .form-group label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+.dashOverview form .form-group input,
+.dashOverview form .form-group select {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #1a1a1a;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  overflow: auto;
+}
+.dashOverview form .inputs-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.dashOverview form .inputs-btn button {
+  padding: 0.5rem 1.5rem;
+  width: 9rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+  background-color: #54bab9;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  margin: 0.5rem 0;
+}
+
+@media screen and (max-width: 1024px) {
+  .dashPage .dashSidebar {
+    position: fixed;
+  }
+  .sidebarCloseBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .openSide {
+    width: 12rem;
+  }
+}
+@media screen and (max-width: 768px) {
+  .dashOverview form .inputs {
+    flex-direction: column;
+    width: 100%;
+    gap: 0rem;
+  }
+}
+@media screen and (max-width: 600px) {
+  .dashOverview {
+    flex-direction: column;
+  }
+  .dashboardMain {
+    padding: 1.25rem 1rem;
+  }
+}

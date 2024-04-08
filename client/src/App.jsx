@@ -15,6 +15,13 @@ import CheckoutSuccess from "./pages/CheckoutSuccess";
 import ProfileLayout from "./pages/ProfileLayout";
 import MyOrders from "./pages/MyOrders";
 import ProtectedRoute from "./utils/protectedRoute";
+import AdminRoute from "./utils/adminRoute";
+import AdminLayout from "./pages/AdminLayout";
+import Dashboard from "./pages/Dashboard";
+import AdminLogin from "./pages/AdminLogin";
+import CustomerList from "./pages/CustomerList";
+import CouponList from "./pages/CouponList";
+import AdminOrders from "./pages/AdminOrders";
 
 const App = () => {
   const { setAuth } = useAuth();
@@ -76,8 +83,23 @@ const App = () => {
         >
           <Route index element={<MyOrders />} />
         </Route>
+
+        <Route
+          path="/admin"
+          element={
+            <AdminRoute>
+              <AdminLayout />
+            </AdminRoute>
+          }
+        >
+          <Route index element={<Dashboard />} />
+          <Route path="customers" element={<CustomerList />} />
+          <Route path="coupons" element={<CouponList />} />
+          <Route path="orders" element={<AdminOrders />} />
+        </Route>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/adminLogin" element={<AdminLogin />} />
         <Route path="checkout-success" element={<CheckoutSuccess />} />
         <Route path="/*" element={<ErrorPage />} />
       </Routes>

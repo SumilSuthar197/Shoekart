@@ -63,7 +63,43 @@ const login = asyncErrorHandler(async (req, res, next) => {
     user: {
       name: userExists.name,
       email: userExists.email,
+      role: userExists.role,
       cartSize,
+    },
+    token,
+  });
+});
+
+const adminLogin = asyncErrorHandler(async (req, res, next) => {
+  const { email, password, role } = req.body;
+
+  if (!email || !password) {
+    return next(new errorHandler("Please provide email and password", 400));
+  }
+
+  const userExists = await user.findOne({ email, role });
+  if (!userExists) {
+    return next(new errorHandler("Invalid credentials", 401));
+  }
+
+  const isMatch = await userExists.comparePassword(password);
+  if (!isMatch) {
+    return next(new errorHandler("Invalid credentials", 401));
+  }
+  const token = jwt.sign(
+    { id: userExists._id, email: userExists.email, role: userExists.role },
+    secret,
+    {
+      expiresIn: "30d",
+    }
+  );
+
+  res.status(200).json({
+    success: true,
+    message: "Admin logged in successfully",
+    user: {
+      name: userExists.name,
+      email: userExists.email,
     },
     token,
   });
@@ -129,6 +165,7 @@ const getOrder = asyncErrorHandler(async (req, res, next) => {
 module.exports = {
   register,
   login,
+  adminLogin,
   verifyUser,
   getOrder,
 };

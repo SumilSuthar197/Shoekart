@@ -6,39 +6,31 @@ import Axios from "../Axios";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
 
-const LoginPage = () => {
+const AdminLogin = () => {
   const navigate = useNavigate();
-  const { setAuth } = useAuth();
-  const [user, setUser] = useState({ email: "", password: "", role: "user" });
+  const { setAdmin } = useAuth();
+  const [user, setUser] = useState({ email: "", password: "", role: "admin" });
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       if (user.email === "" || user.password === "") {
-        toast.error("Please provide email and password", {
-          position: "bottom-right",
-        });
+        toast.error("Please provide email and password");
         return;
       }
-      const response = await Axios.post("/login", user);
+      const response = await Axios.post("/adminLogin", user);
       console.log(response);
 
       if (response.data.success === true) {
-        localStorage.setItem("jwt", "Bearer " + response.data.token);
-        setAuth(response.data.user);
-        toast.success("Login successful. Access granted.", {
-          position: "bottom-right",
-        });
-        navigate("/products");
+        localStorage.setItem("jwtAdmin", "Bearer " + response.data.token);
+        setAdmin(response.data.user);
+        toast.success("Login successful. Access granted.");
+        navigate("/admin");
       } else {
-        toast.error(response.data.message, {
-          position: "bottom-right",
-        });
+        toast.error(response.data.message);
       }
     } catch (error) {
       console.log(error);
-      toast.error(error.response.data.message, {
-        position: "bottom-right",
-      });
+      toast.error(error.response.data.message);
     }
   };
   return (
@@ -46,19 +38,6 @@ const LoginPage = () => {
       <div className="login-div div1">
         <div className="login-box">
           <h1 className="login-heading">Log in to your account</h1>
-          <h2 className="login-subheading">
-            Don&apos;t have an account?{" "}
-            <Link
-              style={{
-                textDecoration: "none",
-                color: "#6286A0",
-                pointerEvents: "cursor",
-              }}
-              to="/signup"
-            >
-              Sign up
-            </Link>
-          </h2>
           <form onSubmit={handleSubmit} className="login-form">
             <div className="input-div">
               <label htmlFor="email">Email</label>
@@ -108,4 +87,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default AdminLogin;

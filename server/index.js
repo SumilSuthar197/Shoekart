@@ -13,8 +13,9 @@ const userRoute = require("./routes/user");
 const productRoute = require("./routes/product");
 const cartRoute = require("./routes/cart");
 const paymentRoute = require("./routes/payments");
+const adminRoute = require("./routes/admin");
 const { webhook } = require("./controllers/payments");
-const { verifyToken } = require("./middleware/auth");
+const { verifyToken, adminOnly } = require("./middleware/auth");
 
 app.post("/webhook", express.raw({ type: "application/json" }), webhook);
 app.use(express.json());
@@ -23,10 +24,11 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.json("Hello World");
 });
-app.use("/api/v1/payment", paymentRoute);
+app.use("/api/v1/payment", verifyToken, paymentRoute);
 app.use("/api/v1/", userRoute);
 app.use("/api/v1/product", productRoute);
 app.use("/api/v1/cart", verifyToken, cartRoute);
+app.use("/api/v1/admin", adminOnly, adminRoute);
 
 app.get("*", (req, res) => {
   //   res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));

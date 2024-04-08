@@ -19,7 +19,7 @@ const CartItems = ({ cartId, data, qty, size, deleteItem, updateData }) => {
         return;
       }
       setDebounceQty(currentQty);
-    }, 800);
+    }, 450);
     return () => {
       clearTimeout(handler);
     };

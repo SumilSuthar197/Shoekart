@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import loginImage from "../Images/login-section-right.svg";
+import loginImage from "../Images/abc4.png";
 import "../styles/auth.css";
 import { useState } from "react";
 import Axios from "../Axios";
@@ -44,7 +44,7 @@ const SignUpPage = () => {
             <Link
               style={{
                 textDecoration: "none",
-                color: "#ea454c",
+                color: "#6286A0",
                 pointerEvents: "cursor",
               }}
               to="/login"

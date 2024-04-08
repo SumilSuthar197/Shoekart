@@ -1,6 +1,4 @@
 require("dotenv").config();
-const jwt = require("jsonwebtoken");
-const secret = process.env.JWT_SECRET;
 const asyncErrorHandler = require("../middleware/asyncErrorHandler");
 const Stripe = require("stripe");
 const order = require("../models/order");
@@ -10,15 +8,17 @@ const product = require("../models/product");
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
 const checkout = asyncErrorHandler(async (req, res) => {
-  const token = req.headers.authorization.split(" ")[1];
-  if (!token) return next(new errorHandler("Token not found", 401));
-  const { id } = jwt.verify(token, secret);
-
-  const cartObj = await user.findById(id).populate({
-    path: "cart.items.productId",
-    select: "name price image brand sizeQuantity",
-  });
+  const id = req.tokenId;
+  const email = req.tokenEmail;
   const { coupon } = req.body;
+
+  const cartObj = await user
+    .findById(id)
+    .populate({
+      path: "cart.items.productId",
+      select: "name price image brand sizeQuantity",
+    })
+    .select("cart name");
 
   const formattedCart = cartObj.cart.items.map((item) => {
     const sizeQty = item.productId.sizeQuantity.filter(
@@ -33,21 +33,19 @@ const checkout = asyncErrorHandler(async (req, res) => {
       price: item.productId.price,
     };
   });
+  let customer;
 
-  const customer = await stripe.customers.create({
-    metadata: {
-      userId: id,
-      cart: JSON.stringify(
-        formattedCart.map((item) => {
-          return {
-            productId: item.productId,
-            qty: item.qty,
-            size: item.size,
-          };
-        })
-      ),
-    },
-  });
+  const existingCustomer = await stripe.customers.list({ email: email });
+  if (existingCustomer.data.length > 0) {
+    customer = existingCustomer.data[0];
+  } else {
+    customer = await stripe.customers.create({
+      name: cartObj.name,
+      email: email,
+      metadata: { userId: id },
+    });
+  }
+
   const line_items = formattedCart.map((item) => {
     return {
       price_data: {
@@ -66,53 +64,48 @@ const checkout = asyncErrorHandler(async (req, res) => {
       quantity: item.qty,
     };
   });
+
   const session = await stripe.checkout.sessions.create({
     line_items,
+    phone_number_collection: { enabled: true },
     billing_address_collection: "required",
     shipping_address_collection: {},
     shipping_options: [
       {
         shipping_rate_data: {
           type: "fixed_amount",
-          fixed_amount: {
-            amount: 0,
-            currency: "inr",
-          },
+          fixed_amount: { amount: 0, currency: "inr" },
           display_name: "Free shipping",
           delivery_estimate: {
-            minimum: {
-              unit: "business_day",
-              value: 5,
-            },
-            maximum: {
-              unit: "business_day",
-              value: 7,
-            },
+            minimum: { unit: "business_day", value: 5 },
+            maximum: { unit: "business_day", value: 7 },
           },
         },
       },
       {
         shipping_rate_data: {
           type: "fixed_amount",
-          fixed_amount: {
-            amount: 30000,
-            currency: "inr",
-          },
+          fixed_amount: { amount: 30000, currency: "inr" },
           display_name: "Next day air",
           delivery_estimate: {
-            minimum: {
-              unit: "business_day",
-              value: 1,
-            },
-            maximum: {
-              unit: "business_day",
-              value: 1,
-            },
+            minimum: { unit: "business_day", value: 1 },
+            maximum: { unit: "business_day", value: 1 },
           },
         },
       },
     ],
     mode: "payment",
+    metadata: {
+      cart: JSON.stringify(
+        formattedCart.map((item) => {
+          return {
+            productId: item.productId,
+            qty: item.qty,
+            size: item.size,
+          };
+        })
+      ),
+    },
     customer: customer.id,
     discounts: coupon !== "" ? [{ coupon }] : [],
     success_url: `${process.env.CLIENT_URL}/checkout-success`,
@@ -123,14 +116,7 @@ const checkout = asyncErrorHandler(async (req, res) => {
 
 const createOrder = async (customer, data) => {
   try {
-    const Items = JSON.parse(customer.metadata.cart);
-    const products = Items.map((item) => {
-      return {
-        productId: item.productId,
-        quantity: item.qty,
-        size: item.size,
-      };
-    });
+    const products = JSON.parse(data.metadata.cart);
 
     await order.create({
       userId: customer.metadata.userId,
@@ -157,7 +143,6 @@ const createOrder = async (customer, data) => {
       });
       await productObj.save();
     }
-
     console.log("Order created successfully");
   } catch (err) {
     console.log(err);
@@ -192,8 +177,6 @@ const webhook = asyncErrorHandler((request, response) => {
       stripe.customers
         .retrieve(data.customer)
         .then(async (customer) => {
-          console.log("Customer: ", customer);
-          console.log("Data: ", data);
           createOrder(customer, data);
         })
         .catch((error) => {
@@ -204,7 +187,6 @@ const webhook = asyncErrorHandler((request, response) => {
       // console.log(`Unhandled event type ${eventType}`);
       break;
   }
-
   response.status(200).send();
 });
 module.exports = { checkout, webhook };
