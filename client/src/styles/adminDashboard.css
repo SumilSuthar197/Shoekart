@@ -3,7 +3,6 @@
   flex-direction: row;
   /* height: 100%; */
   /* background-color: #f7f7f7; */
-  
 }
 .dashPage .dashSidebar {
   background-color: #faebd7;
@@ -241,12 +240,16 @@
   width: 100%;
   gap: 1rem;
 }
+.dash-forms form .form-group {
+  width: 100%;
+}
 .dashOverview form .form-group label {
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 500;
   color: #1a1a1a;
 }
 .dashOverview form .form-group input,
+.dashOverview form .form-group textarea,
 .dashOverview form .form-group select {
   padding: 0.5rem 0.75rem;
   font-size: 0.9rem;
@@ -258,7 +261,10 @@
   margin-bottom: 0.5rem;
   width: 100%;
   overflow: auto;
+  font-family: sans-serif;
+  resize: none;
 }
+
 .dashOverview form .inputs-btn {
   display: flex;
   justify-content: center;
@@ -266,7 +272,8 @@
   gap: 1rem;
   margin-bottom: 1.5rem;
 }
-.dashOverview form .inputs-btn button {
+.dashOverview form .inputs-btn button,
+.dash-input-4 button {
   padding: 0.5rem 1.5rem;
   width: 9rem;
   font-size: 1rem;
@@ -278,7 +285,107 @@
   cursor: pointer;
   margin: 0.5rem 0;
 }
-
+.dash-input-4 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-direction: row;
+}
+.dash-input-4 button {
+  width: 100%;
+}
+.adminSearchBar {
+  width: 100%;
+  margin-top: 0.75rem;
+  gap: 1rem;
+}
+.adminSearchBar .searchForm {
+  width: 100%;
+}
+.dash-input-1 {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 1.5rem;
+}
+.admin-upload {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  border-radius: 0.4rem;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border-style: dashed;
+  position: relative;
+}
+.admin-upload label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  cursor: pointer;
+}
+.admin-upload:hover {
+  background-color: #f3f4f6;
+}
+.admin-upload label > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.admin-upload p {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  color: #6b7280;
+  text-align: center;
+}
+.admin-upload svg {
+  margin-bottom: 1rem;
+  width: 7rem;
+  height: 7rem;
+  color: #6b7280;
+}
+.admin-upload img {
+  position: absolute; /* This will make the image fill the div */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background-color: #e5e5e5;
+  border-radius: 0.4rem;
+  /* width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.4rem;
+  overflow: hidden; */
+}
+.dash-input-2 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  /* flex-direction: column; */
+}
+.dash-input-2 .form-group {
+  width: 49%;
+}
+.dash-input-3 .dash-size-group {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
+  /* flex-direction: column; */
+}
+.dash-input-3 .dash-size-group .form-group {
+  width: 49%;
+}
 @media screen and (max-width: 1024px) {
   .dashPage .dashSidebar {
     position: fixed;
@@ -291,12 +398,24 @@
   .openSide {
     width: 12rem;
   }
+  .admin-upload {
+    width: 70%;
+  }
 }
 @media screen and (max-width: 768px) {
   .dashOverview form .inputs {
     flex-direction: column;
     width: 100%;
     gap: 0rem;
+  }
+  .admin-upload {
+    width: 90%;
+  }
+}
+@media screen and (max-width: 650px) {
+  .dash-input-4 {
+    flex-direction: column;
+    gap: 0;
   }
 }
 @media screen and (max-width: 600px) {
@@ -306,4 +425,44 @@
   .dashboardMain {
     padding: 1.25rem 1rem;
   }
+  .admin-upload {
+    width: 100%;
+    height: 300px;
+  }
+  .dash-input-1 {
+    flex-direction: column-reverse;
+  }
+  .dash-input-2 {
+    flex-direction: column;
+    margin-top: 0rem;
+  }
+  .dash-input-2 .form-group {
+    width: 100%;
+  }
+}
+
+/* graph */
+.graphBox {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  width: 100%;
+  min-height: 400px;
+}
+
+.graphBox .graph-box {
+  position: relative;
+  background-color: #f3f4f6;
+  padding: 1.5rem 1.25rem;
+  margin: 2rem 0;
+  border-radius: 0.5rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+}
+
+.graphBox .box-1 {
+  width: 100%;
 }

@@ -2,7 +2,9 @@ const user = require("../models/user");
 const asyncErrorHandler = require("../middleware/asyncErrorHandler");
 const errorHandler = require("../utils/errorHandler");
 const order = require("../models/order");
+const product = require("../models/product");
 const Stripe = require("stripe");
+const brands = require("../models/brands");
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
 const getAllUsers = asyncErrorHandler(async (req, res) => {
@@ -143,6 +145,151 @@ const deleteCoupon = asyncErrorHandler(async (req, res) => {
     message: "Coupon deleted successfully.",
   });
 });
+
+const getAllProducts = asyncErrorHandler(async (req, res) => {
+  const { page, limit, searchTerm } = req.query;
+  const products = await product
+    .find({ name: { $regex: searchTerm, $options: "i" } })
+    .skip((page - 1) * limit)
+    .limit(limit)
+    .sort("brand name");
+
+  const count = await product.countDocuments({
+    name: { $regex: searchTerm, $options: "i" },
+  });
+
+  const formattedList = products.map((product) => ({
+    _id: product._id,
+    image: product.image,
+    name: product.name,
+    desc: `${(product.ratingScore / product.ratings.length || 0).toFixed(
+      1
+    )} stars, ${product.color}`,
+    size: product.sizeQuantity
+      .map((size) => `${size.size} (${size.quantity} unit)`)
+      .join(", "),
+    brand: product.brand,
+    status: product.isActive ? "Active" : "Inactive",
+    price: product.price,
+    slug: product.slug,
+  }));
+  res.status(200).json({
+    success: true,
+    count,
+    products: formattedList,
+  });
+});
+
+const productStatus = asyncErrorHandler(async (req, res) => {
+  const currentProduct = await product.findById(req.params.id);
+  const productBrand = await brands.findOne({ name: currentProduct.brand });
+  productBrand.activeProducts += currentProduct.isActive ? -1 : 1;
+  currentProduct.isActive = !currentProduct.isActive;
+  await currentProduct.save();
+  await productBrand.save();
+  res.status(200).json({
+    success: true,
+    message: "Product status updated successfully.",
+  });
+});
+
+const getAdminDetails = asyncErrorHandler(async (req, res) => {
+  const label1 = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const data1 = [];
+  const label2 = ["Pending", "Delivered", "Cancelled"];
+  const data2 = [];
+  const now = new Date();
+  const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+  const firstDayOfNextMonth = new Date(
+    now.getFullYear(),
+    now.getMonth() + 1,
+    1
+  );
+  const ordersData = await order.aggregate([
+    {
+      $match: {
+        createdAt: { $gte: new Date(new Date().getFullYear(), 0, 1) },
+      },
+    },
+    {
+      $group: {
+        _id: { $month: "$createdAt" },
+        totalSales: { $sum: "$total" },
+        count: { $sum: 1 },
+      },
+    },
+    {
+      $sort: { _id: 1 },
+    },
+  ]);
+
+  Array.from({ length: 12 }, (_, i) => {
+    const monthData = ordersData.find((data) => data._id === i + 1);
+    if (monthData) {
+      data1.push(Number(monthData.totalSales).toFixed(2));
+    } else {
+      data1.push(0);
+    }
+  });
+
+  const orderUpdate = await order.aggregate([
+    {
+      $match: {
+        createdAt: {
+          $gt: firstDayOfMonth,
+          $lte: firstDayOfNextMonth,
+        },
+      },
+    },
+    {
+      $group: {
+        _id: "$delivery_status",
+        count: { $sum: 1 },
+      },
+    },
+  ]);
+
+  label2.forEach((status) => {
+    orderUpdate.forEach((data) => {
+      if (data._id.toLowerCase() === status.toLowerCase()) {
+        data2.push(data.count);
+      }
+    });
+  });
+  const totalUsers = await user.countDocuments({ role: "user" });
+  const totalOrders = await order.countDocuments();
+  const totalProducts = await product.countDocuments();
+  const totalSales = await order.aggregate([
+    {
+      $group: {
+        _id: null,
+        total: { $sum: "$total" },
+      },
+    },
+  ]);
+  res.status(200).json({
+    success: true,
+    bar1: { labels: label1, data: data1 },
+    bar2: { labels: label2, data: data2 },
+    totalUsers,
+    totalOrders,
+    totalProducts,
+    totalSales: totalSales[0].total.toFixed(2),
+  });
+});
 module.exports = {
   getAllUsers,
   getCoupons,
@@ -150,4 +297,7 @@ module.exports = {
   deleteCoupon,
   getAllOrders,
   updateOrderStatus,
+  getAllProducts,
+  productStatus,
+  getAdminDetails,
 };

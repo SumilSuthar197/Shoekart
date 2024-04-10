@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
 const AdminPagination = ({
@@ -56,4 +57,4 @@ const AdminPagination = ({
   );
 };
 
-export default AdminPagination;
+export default memo(AdminPagination);

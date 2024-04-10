@@ -18,6 +18,7 @@
   transform: scale(1.2);
 }
 .prod-image img {
+  object-fit: contain;
   margin-bottom: 0%;
   height: 550px;
   width: 100%;
@@ -35,6 +36,7 @@
   border-radius: 6px;
   height: 200px;
   overflow: hidden;
+  object-fit: contain;
 }
 .prod-details-cont {
   font-family: "Inter", sans-serif;

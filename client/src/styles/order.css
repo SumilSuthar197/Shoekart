@@ -53,7 +53,9 @@
   justify-content: center;
   align-items: center;
 }
-.order-btn-cont button,.rating-btn button {
+.order-btn-cont button,
+.rating-btn button,
+.adminSearchBar button {
   width: 100px;
   padding: 10px 0;
   margin: 6px;
@@ -66,14 +68,16 @@
   border: 1px solid #54bab9;
   cursor: pointer;
 }
-.order-btn-cont button:hover,.rating-btn button:hover {
+.order-btn-cont button:hover,
+.rating-btn button:hover,
+.adminSearchBar button:hover {
   background-color: #3f8f8e;
   border: 1px solid #3f8f8e;
 }
 .formReview {
   background: #fff;
   padding: 2rem;
-  margin:  0 1rem;
+  margin: 0 1rem;
   max-width: 576px;
   width: 100%;
   border-radius: 0.75rem;

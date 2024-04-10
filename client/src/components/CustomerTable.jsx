@@ -38,11 +38,6 @@ const CustomerTable = ({ columns, data, handleChange }) => {
                     {...column.getHeaderProps(column.getSortByToggleProps())}
                   >
                     {column.render("Header")}
-                    {/* {column.render("Header") === "Transaction Fees" && (
-                      <span className="p-1 ">
-                        <FiInfo size={16} />
-                      </span>
-                    )} */}
                     <span className="reactTableSorted">
                       {column.isSorted ? (
                         column.isSortedDesc ? (

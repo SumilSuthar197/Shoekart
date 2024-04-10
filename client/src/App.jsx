@@ -22,6 +22,10 @@ import AdminLogin from "./pages/AdminLogin";
 import CustomerList from "./pages/CustomerList";
 import CouponList from "./pages/CouponList";
 import AdminOrders from "./pages/AdminOrders";
+import AdminProductList from "./pages/AdminProductList";
+import AddProducts from "./pages/AddProducts";
+import UpdateProducts from "./pages/UpdateProducts";
+import BrandList from "./pages/BrandList";
 
 const App = () => {
   const { setAuth } = useAuth();
@@ -96,6 +100,10 @@ const App = () => {
           <Route path="customers" element={<CustomerList />} />
           <Route path="coupons" element={<CouponList />} />
           <Route path="orders" element={<AdminOrders />} />
+          <Route path="products" element={<AdminProductList />} />
+          <Route path="product/add" element={<AddProducts />} />
+          <Route path="product/update/:slug" element={<UpdateProducts />} />
+          <Route path="brands" element={<BrandList />} />
         </Route>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />

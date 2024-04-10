@@ -14,6 +14,7 @@ const productRoute = require("./routes/product");
 const cartRoute = require("./routes/cart");
 const paymentRoute = require("./routes/payments");
 const adminRoute = require("./routes/admin");
+const brandRoute = require("./routes/brands");
 const { webhook } = require("./controllers/payments");
 const { verifyToken, adminOnly } = require("./middleware/auth");
 
@@ -29,6 +30,7 @@ app.use("/api/v1/", userRoute);
 app.use("/api/v1/product", productRoute);
 app.use("/api/v1/cart", verifyToken, cartRoute);
 app.use("/api/v1/admin", adminOnly, adminRoute);
+app.use("/api/v1/brands", adminOnly, brandRoute);
 
 app.get("*", (req, res) => {
   //   res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));

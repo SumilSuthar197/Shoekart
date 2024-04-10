@@ -5,7 +5,6 @@ const asyncErrorHandler = require("./asyncErrorHandler");
 const errorHandler = require("../utils/errorHandler");
 
 const adminOnly = asyncErrorHandler(async (req, res, next) => {
-  console.log(req.headers.authorization, "auth");
   const token = req.headers.authorization.split(" ")[1];
   if (!token) return next(new errorHandler("Token not found", 401));
   const { id, email } = jwt.verify(token, secret);

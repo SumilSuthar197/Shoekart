@@ -172,7 +172,7 @@
   align-items: center;
 }
 .Featured-products img {
-  object-fit: fill;
+  object-fit: contain;
   width: inherit;
   aspect-ratio: 1;
   padding: 15px 8px 0;

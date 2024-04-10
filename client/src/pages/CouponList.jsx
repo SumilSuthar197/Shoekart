@@ -120,6 +120,13 @@ const CouponList = () => {
         }
       );
       toast.success(response.data.message);
+      setFormData({
+        name: "",
+        discount: "",
+        duration: "",
+        duration_in_months: "",
+        max_redemptions: "",
+      });
       fetch();
     } catch (error) {
       toast.error(error?.response?.data?.message);

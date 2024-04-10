@@ -52,7 +52,7 @@ const AdminSideBar = ({ toggleOpen }) => {
         <SideItems
           iconName={<TbBrandBooking size={22} />}
           text="Brands"
-          to="/"
+          to="/admin/brands"
         />
         <SideItems
           iconName={<MdOutlineLogout size={20} />}

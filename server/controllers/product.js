@@ -4,6 +4,7 @@ const asyncErrorHandler = require("../middleware/asyncErrorHandler");
 const errorHandler = require("../utils/errorHandler");
 const order = require("../models/order");
 const user = require("../models/user");
+const brands = require("../models/brands");
 
 const getAllProducts = asyncErrorHandler(async (req, res, next) => {
   const products = await product.find({});
@@ -20,6 +21,7 @@ const getProducts = asyncErrorHandler(async (req, res, next) => {
   const sortParam = req.query.sortBy.value || "createdAt_asc";
   const colors = req.query.color;
   const sizes = req.query.size;
+  const brand = req.query.brand;
   const priceRange = req.query.price;
 
   const query = {
@@ -30,6 +32,10 @@ const getProducts = asyncErrorHandler(async (req, res, next) => {
     },
     isActive: true,
   };
+
+  if (brand && brand.length > 0) {
+    query.brand = { $in: brand.map((brand) => brand) };
+  }
 
   if (colors && colors.length > 0) {
     query.color = { $in: colors.map((color) => new RegExp(`^${color}$`, "i")) };
@@ -59,7 +65,8 @@ const getProducts = asyncErrorHandler(async (req, res, next) => {
     .limit(limit);
 
   const colorOptions = await product.distinct("color");
-  const brandOptions = await product.distinct("brand");
+  const brandOption = await brands.find({}).select("name");
+  const brandOptions = brandOption.map((brand) => brand.name);
   const total = await product.countDocuments(query);
 
   res.status(200).json({
@@ -91,12 +98,12 @@ const createProduct = asyncErrorHandler(async (req, res, next) => {
     name,
     brand,
     image,
-    description,
+    desc,
     price,
     sizeQuantity,
     color,
     material,
-    isActive,
+    featured,
   } = req.body;
 
   if (
@@ -104,12 +111,11 @@ const createProduct = asyncErrorHandler(async (req, res, next) => {
     !name ||
     !brand ||
     !image ||
-    !description ||
+    !desc ||
     !price ||
     !color ||
     !material ||
-    !isActive ||
-    !sizeQuantity
+    sizeQuantity.length === 0
   ) {
     return next(new errorHandler("Please fill all fields", 400));
   }
@@ -124,13 +130,18 @@ const createProduct = asyncErrorHandler(async (req, res, next) => {
     name,
     brand,
     image,
-    description,
+    description: desc,
     price,
     sizeQuantity,
     color,
     material,
-    isActive,
+    isFeatured: featured,
   });
+
+  const productBrand = await brands.findOne({ name: brand });
+  productBrand.totalProducts += 1;
+  productBrand.activeProducts += 1;
+  await productBrand.save();
 
   res.status(201).json({
     success: true,
@@ -138,9 +149,63 @@ const createProduct = asyncErrorHandler(async (req, res, next) => {
   });
 });
 
+const updateProduct = asyncErrorHandler(async (req, res, next) => {
+  const { slug } = req.params;
+  const {
+    sku,
+    name,
+    brand,
+    image,
+    desc,
+    price,
+    sizeQuantity,
+    color,
+    material,
+    featured,
+  } = req.body;
+
+  if (
+    !sku ||
+    !name ||
+    !brand ||
+    !image ||
+    !desc ||
+    !price ||
+    !color ||
+    !material ||
+    sizeQuantity.length === 0
+  ) {
+    return next(new errorHandler("Please fill all fields", 400));
+  }
+
+  const productExists = await product.findOne({ slug });
+  if (!productExists) {
+    return next(new errorHandler("Product does not exist", 404));
+  }
+
+  productExists.sku = sku;
+  productExists.name = name;
+  productExists.brand = brand;
+  productExists.image = image;
+  productExists.description = desc;
+  productExists.price = price;
+  productExists.sizeQuantity = sizeQuantity;
+  productExists.color = color;
+  productExists.material = material;
+  productExists.isFeatured = featured;
+
+  await productExists.save();
+
+  res.status(200).json({
+    success: true,
+    message: "Product updated successfully",
+  });
+});
+
 const getFilterOptions = asyncErrorHandler(async (req, res, next) => {
   const colors = await product.distinct("color");
-  const brands = await product.distinct("brand");
+  // const brands = await product.distinct("brand");
+  const brands = await brands.find({}).select("name");
 
   res.status(200).json({
     success: true,
@@ -200,4 +265,5 @@ module.exports = {
   getFilterOptions,
   updateReview,
   getFeaturedProducts,
+  updateProduct,
 };
