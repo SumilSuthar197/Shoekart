@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import CustomerTable from "../components/CustomerTable";
 import { toast } from "react-toastify";
 import Axios from "../Axios";
+import TriangleLoader from "../components/TriangleLoader";
 
 const CouponList = () => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const fetch = async () => {
     try {
       console.log("fetching coupons");
@@ -21,8 +23,10 @@ const CouponList = () => {
       if (response.data.success) {
         setData(response.data.data);
       }
+      setLoading(false);
     } catch (error) {
       toast.error(error?.response?.data?.message);
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -132,11 +136,11 @@ const CouponList = () => {
       toast.error(error?.response?.data?.message);
     }
   };
-
+  if (loading) return <TriangleLoader height="500px" />;
   return (
     <div className="dashboardMain">
       <h1>Coupons</h1>
-      <div className="dashOverview">
+      <div className="dashOverview dash-forms">
         <form onSubmit={handleFormSubmit}>
           <div className="inputs">
             <div className="form-group">

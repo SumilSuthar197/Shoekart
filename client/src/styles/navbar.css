@@ -20,13 +20,28 @@
   transition-duration: 1s;
   transition-timing-function: ease;
 }
-.logo {
+/* .logo {
   padding: 0 0 0 28px;
   margin-bottom: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+} */
+.logo {
+  padding: 0 0 0 24px;
+  margin-bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* cursor: pointer; */
+}
+.logo a {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  text-decoration: none;
+  font-style: italic;
 }
 .logo img {
   height: 27px;

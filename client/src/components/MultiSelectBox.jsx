@@ -1,7 +1,13 @@
 import { useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
-const MultiSelectBox = ({ multiple, options, value, onChange }) => {
+const MultiSelectBox = ({
+  customWidth,
+  multiple,
+  options,
+  value,
+  onChange,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const selectOption = (option) => {
     if (multiple) {
@@ -27,6 +33,7 @@ const MultiSelectBox = ({ multiple, options, value, onChange }) => {
         setIsOpen(false);
       }}
       onClick={() => setIsOpen((prev) => !prev)}
+      style={customWidth ? { width: "100%" } : {}}
     >
       <span className="select-value">
         {multiple

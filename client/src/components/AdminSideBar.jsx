@@ -1,20 +1,27 @@
 import React from "react";
-import logo from "../assets/LOGO.svg";
+import logo from "../../public/android-chrome-512x512.png";
 import SideItems from "./SideItems";
+import { useNavigate } from "react-router-dom";
 import { FaHome, FaUser, FaClipboardList } from "react-icons/fa";
-import { MdWindow, MdOutlineLogout, MdMenuOpen } from "react-icons/md";
+import {
+  MdWindow,
+  MdOutlineLogout,
+  MdMenuOpen,
+  MdCategory,
+} from "react-icons/md";
 import { BiSolidDiscount } from "react-icons/bi";
 import { TbBrandBooking } from "react-icons/tb";
 import { Link } from "react-router-dom";
 
 const AdminSideBar = ({ toggleOpen }) => {
+  const navigate = useNavigate();
   return (
     <>
       <div className="sideBarLogoMain">
         <div className="sideBarLogo">
           <img src={logo} alt="logo" />
           <div>
-            <div className="sideBrandName">ShoeKart</div>
+            <div className="sideBrandName">SHOEKART</div>
             <Link
               to="/"
               className="sideBrandLink text-sm underline text-[#ccc] hover:text-white"
@@ -55,10 +62,22 @@ const AdminSideBar = ({ toggleOpen }) => {
           to="/admin/brands"
         />
         <SideItems
-          iconName={<MdOutlineLogout size={20} />}
-          text="Logout"
-          to="/"
+          iconName={<MdCategory size={20} />}
+          text="Category"
+          to="/admin/category"
         />
+        <li
+          onClick={() => {
+            localStorage.removeItem("jwtAdmin");
+            navigate("/adminlogin");
+          }}
+          className="sideItemLink hover:cursor-pointer hover:bg-[#ffffff0d] flex items-center gap-3 px-4 py-2 rounded-md mb-1 text-[14px]"
+        >
+          <div className="sideItemIcon">
+            <MdOutlineLogout size={20} />
+          </div>
+          <div className="sideItemName">Logout</div>
+        </li>
       </ul>
     </>
   );

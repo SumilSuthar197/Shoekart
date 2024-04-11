@@ -31,7 +31,7 @@ const ContactPage = () => {
                 <div>
                   <FiMail />
                 </div>{" "}
-                contactus@nike.com
+                contactus@shoekart.com
               </li>
               <li>
                 <div>

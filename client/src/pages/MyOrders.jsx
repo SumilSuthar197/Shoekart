@@ -79,9 +79,9 @@ const MyOrders = () => {
               >
                 Product Details
               </th>
-              <th className="order-subheader order-th ">Order Date</th>
-              <th className="order-subheader order-th ">Status</th>
-              <th className="order-subheader order-th ">Total Price</th>
+              <th className="order-subheader order-th">Order Date</th>
+              <th className="order-subheader order-th">Status</th>
+              <th className="order-subheader order-th">Total Price</th>
             </tr>
           </thead>
           <tbody className="order-table-tbody">
@@ -157,7 +157,7 @@ const MyOrders = () => {
           </div>
         )}
       </div>
-      
+
       {showModal && (
         <FormReviews
           onClose={() => setShowModal(false)}

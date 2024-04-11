@@ -250,6 +250,24 @@
   color: #54bab9;
   border: 1px solid #54bab9;
 }
+.emptyProductList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin: 5rem 0;
+  color: #777;
+  flex-direction: column;
+}
+.emptyProductList p:first-child {
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-align: center;
+}
+.emptyProductList p:last-child {
+  font-size: 1rem;
+  text-align: center;
+}
 @media screen and (max-width: 768px) {
   .search_header {
     gap: 0.3rem;

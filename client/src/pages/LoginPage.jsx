@@ -49,11 +49,7 @@ const LoginPage = () => {
           <h2 className="login-subheading">
             Don&apos;t have an account?{" "}
             <Link
-              style={{
-                textDecoration: "none",
-                color: "#6286A0",
-                pointerEvents: "cursor",
-              }}
+              className="signup-link"
               to="/signup"
             >
               Sign up
@@ -86,18 +82,12 @@ const LoginPage = () => {
                 placeholder="Enter your password"
               />
             </div>
-            <button
-              onClick={handleSubmit}
-              className="login-button"
-              type="submit"
-            >
+            <button className="login-button" type="submit">
               Login
             </button>
           </form>
           <div className="forget-button">
-            <button onClick={() => console.log("forget password")}>
-              Forget password?
-            </button>
+            <button type="button">Forget password?</button>
           </div>
         </div>
       </div>

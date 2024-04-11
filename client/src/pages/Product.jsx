@@ -21,6 +21,7 @@ const Product = () => {
     size: [],
     color: [],
     brand: [],
+    category: "",
     price: { minPrice: 0, maxPrice: Infinity },
   });
   const [options, setOptions] = useState(null);
@@ -41,6 +42,7 @@ const Product = () => {
         setOptions({
           colors: response.data.colorOptions,
           brands: response.data.brandOptions,
+          category: response.data.categoryOptions,
         });
         setLoading(false);
         console.log(response.data);
@@ -94,7 +96,7 @@ const Product = () => {
       </div>
       {loading ? (
         <TriangleLoader height="300px" />
-      ) : (
+      ) : products.length > 0 ? (
         <>
           <section className="Featured-products featured-div">
             <div className="product-container">
@@ -113,6 +115,11 @@ const Product = () => {
             pageIndex={currentPage - 1}
           />
         </>
+      ) : (
+        <div className="emptyProductList">
+          <p>We couldn't find any matches!</p>
+          <p>Please adjust your search criteria and try again.</p>
+        </div>
       )}
     </>
   );

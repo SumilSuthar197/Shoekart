@@ -186,6 +186,14 @@
   gap: 0.2rem;
   margin-top: -1rem;
 }
+.outOfStock{
+  color: #ff0000;
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0.2rem;
+  margin-top: -1rem;
+}
 @media only screen and (max-width: 850px) {
   .product-bg {
     flex-direction: column;

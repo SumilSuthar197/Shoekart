@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Axios from "../Axios";
 import CustomerTable from "../components/CustomerTable";
+import TriangleLoader from "../components/TriangleLoader";
 const CustomerList = () => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetch = async () => {
       try {
@@ -19,8 +21,10 @@ const CustomerList = () => {
         if (response.data.success) {
           setData(response.data.users);
         }
+        setLoading(false);
       } catch (error) {
         toast.error(error?.response?.data?.message);
+        setLoading(false);
       }
     };
     fetch();
@@ -48,6 +52,7 @@ const CustomerList = () => {
       },
     },
   ];
+  if (loading) return <TriangleLoader height="500px" />;
   return (
     <div className="dashboardMain">
       <h1>Customers</h1>

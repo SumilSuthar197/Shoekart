@@ -7,22 +7,26 @@ import {
   CategoryScale,
   LinearScale,
   Tooltip,
+  Title,
   Legend,
   ArcElement,
 } from "chart.js";
 import { Bar, Doughnut } from "react-chartjs-2";
 import Axios from "../Axios";
 import { toast } from "react-toastify";
+import TriangleLoader from "../components/TriangleLoader";
 
 ChartJS.register(
   BarElement,
   CategoryScale,
   LinearScale,
   Tooltip,
+  Title,
   ArcElement,
   Legend
 );
 const Dashboard = () => {
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState({
     bar1: { labels: [], data: [] },
     bar2: { labels: [], data: [] },
@@ -31,7 +35,6 @@ const Dashboard = () => {
     totalProducts: 0,
     totalSales: 0,
   });
-  // const [bar1, setBar1] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -49,8 +52,11 @@ const Dashboard = () => {
           ...res.data,
           bar1: { labels: res.data.bar1.labels, data: myData },
         });
+        setLoading(false);
       } catch (error) {
         console.log(error);
+        toast.error("Something went wrong");
+        setLoading(false);
       }
     };
     fetchData();
@@ -59,11 +65,9 @@ const Dashboard = () => {
     labels: data.bar1.labels,
     datasets: [
       {
-        labels: "Amount",
         data: data.bar1.data,
-        backgroundColor: "#54BAB9",
-
-        label: "Sales Amount per Month",
+        backgroundColor: "#28A745",
+        label: "Amount",
       },
     ],
   };
@@ -71,37 +75,33 @@ const Dashboard = () => {
     labels: data.bar2.labels,
     datasets: [
       {
-        labels: "Amount",
         data: data.bar2.data,
         backgroundColor: ["#FFC107", "#28A745", "red", "#DC3545"],
-        label: "Order Status",
+        label: "No of Orders",
       },
     ],
   };
   const options1 = {
     responsive: true,
     plugins: {
-      legend: {
-        position: "top",
-      },
+      legend: { display: false },
       title: {
         display: true,
-        text: "Sales Amount per Month",
+        text: "Monthly Sales Amount for the Current Year",
       },
     },
   };
   const options2 = {
     responsive: true,
     plugins: {
-      legend: {
-        position: "top",
-      },
+      legend: { position: "top" },
       title: {
         display: true,
-        text: "Order Status",
+        text: "Percentage Distribution of Order Status for Current Month",
       },
     },
   };
+  if (loading) return <TriangleLoader height="500px" />;
   return (
     <div className="dashboardMain">
       <h1>Dashboard</h1>

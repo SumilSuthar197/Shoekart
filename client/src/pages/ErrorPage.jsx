@@ -30,10 +30,8 @@ const ErrorPage = () => {
   }
   return (
     <section className="Error-cont">
-      {/* <div className="Error-main-div"> */}
       <div className="Error-div-center">
         <h2>
-          {/* <span className="sr-only">Error</span> */}
           {statusCode || "404"}
         </h2>
         <p className="Error-p1">
@@ -46,7 +44,6 @@ const ErrorPage = () => {
         <Link to="/" className="Error-back-to-homepage">
           Back to homepage
         </Link>
-        {/* </div> */}
       </div>
     </section>
   );

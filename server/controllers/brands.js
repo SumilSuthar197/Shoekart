@@ -1,6 +1,7 @@
 const asyncErrorHandler = require("../middleware/asyncErrorHandler");
 const errorHandler = require("../utils/errorHandler");
 const brand = require("../models/brands");
+const category = require("../models/category");
 
 const getAllBrands = asyncErrorHandler(async (req, res) => {
   const brands = await brand.find();
@@ -55,9 +56,13 @@ const updateBrand = asyncErrorHandler(async (req, res) => {
 const getOptions = asyncErrorHandler(async (req, res) => {
   const brands = await brand.find();
   const brandOptions = brands.map((brand) => brand.name);
+  const categories = await category.find();
+  const categoryOptions = categories.map((category) => category.name);
+
   res.status(200).json({
     success: true,
     brandOptions,
+    categoryOptions,
   });
 });
 

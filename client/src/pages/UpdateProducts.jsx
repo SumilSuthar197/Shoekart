@@ -15,6 +15,7 @@ const UpdateProducts = () => {
     color: "",
     brand: "",
     material: "",
+    category: "",
     featured: "false",
   });
   const [link, setLink] = useState(null);
@@ -63,7 +64,9 @@ const UpdateProducts = () => {
   const changeLink = (e) => {
     setLink(e);
   };
-
+  const changeCategory = (e) => {
+    setData({ ...data, category: e });
+  };
   const handleInputChange = (event) => {
     setData({ ...data, [event.target.id]: event.target.value });
   };
@@ -128,6 +131,7 @@ const UpdateProducts = () => {
           fields={fields}
           changeFields={changeFields}
           name="Update Product"
+          changeCategory={changeCategory}
           handleSubmit={handleSubmit}
           handleCancel={() => navigate("/admin/products")}
         />

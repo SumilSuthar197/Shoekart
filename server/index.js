@@ -15,6 +15,7 @@ const cartRoute = require("./routes/cart");
 const paymentRoute = require("./routes/payments");
 const adminRoute = require("./routes/admin");
 const brandRoute = require("./routes/brands");
+const categoryRoute = require("./routes/category");
 const { webhook } = require("./controllers/payments");
 const { verifyToken, adminOnly } = require("./middleware/auth");
 
@@ -23,7 +24,16 @@ app.use(express.json());
 
 //using routes
 app.get("/", (req, res) => {
-  res.json("Hello World");
+  res.json({
+    project: "Shoekart API",
+    description:
+      "This is an API for an shoes E-commerce application. It provides endpoints for managing products, orders, and users.",
+    author: {
+      name: "Sumil Suthar",
+      portfolio: "http://sumilsuthar.me/",
+    },
+    version: "1.0.0",
+  });
 });
 app.use("/api/v1/payment", verifyToken, paymentRoute);
 app.use("/api/v1/", userRoute);
@@ -31,6 +41,7 @@ app.use("/api/v1/product", productRoute);
 app.use("/api/v1/cart", verifyToken, cartRoute);
 app.use("/api/v1/admin", adminOnly, adminRoute);
 app.use("/api/v1/brands", adminOnly, brandRoute);
+app.use("/api/v1/category", adminOnly, categoryRoute);
 
 app.get("*", (req, res) => {
   //   res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));

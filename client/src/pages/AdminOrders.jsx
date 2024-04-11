@@ -149,7 +149,6 @@ const AdminOrders = () => {
                       }
                     >
                       Delivered
-                      {/* {product.isReviewed ? "Reviewed" : "Review"} */}
                     </button>
                     <button
                       className="cart-delete-btn"

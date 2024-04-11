@@ -3,6 +3,7 @@ import axios from "axios";
 import FormData from "form-data";
 import { toast } from "react-toastify";
 import Axios from "../Axios";
+import MultiSelectBox from "./MultiSelectBox";
 
 const ProductForm = ({
   data,
@@ -14,6 +15,7 @@ const ProductForm = ({
   name,
   handleSubmit,
   handleCancel,
+  changeCategory,
 }) => {
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
@@ -72,12 +74,14 @@ const ProductForm = ({
     changeFields(newFields);
   };
   const [options, setOptions] = useState([]);
+
   useEffect(() => {
     const fetchOptions = async () => {
       try {
         const res = await Axios.get("product/options");
-
-        setOptions(res.data.brandOptions);
+        console.log(res.data);
+        setOptions({ ...res.data });
+        // setOptions(res.data.brandOptions);
       } catch (error) {
         console.log(error);
       }
@@ -102,7 +106,6 @@ const ProductForm = ({
     "Purple",
     "Silver",
   ];
-
   return (
     <form className="order-table">
       <div className="dash-input-1">
@@ -215,11 +218,12 @@ const ProductForm = ({
             value={data.brand}
           >
             <option value="">Select a brand</option>
-            {options.map((brand, index) => (
-              <option key={index} value={brand}>
-                {brand}
-              </option>
-            ))}
+            {options.brandOptions &&
+              options.brandOptions.map((brand, index) => (
+                <option key={index} value={brand}>
+                  {brand}
+                </option>
+              ))}
           </select>
         </div>
         <div className="form-group">
@@ -246,7 +250,34 @@ const ProductForm = ({
           </select>
         </div>
       </div>
-
+      <div className="form-group">
+        <label htmlFor="category">Product Category</label>
+        <MultiSelectBox
+          customWidth={true}
+          multiple={true}
+          options={
+            options.categoryOptions
+              ? options.categoryOptions.map((category) => ({
+                  value: category,
+                  label: category,
+                }))
+              : []
+          }
+          value={data.category === "" ? [] : data.category.split(",")}
+          onChange={(e) => {
+            changeCategory(e.join(","));
+          }}
+        />
+        {/* <select
+          className="form-control"
+          id="featured"
+          onChange={handleInputChange}
+          value={data.featured}
+        >   
+          <option value="false">false</option>{" "}
+          <option value="true">true</option>
+        </select> */}
+      </div>
       <div className="orderContainer" style={{ flexDirection: "column" }}>
         <table className="order-table">
           <thead>
@@ -279,7 +310,9 @@ const ProductForm = ({
                         textAlign: "center",
                         padding: "1rem 0",
                         border: "none",
+                        outline: "none",
                       }}
+                      min={0}
                       className="form-control"
                       id={`qty${index}`}
                       name="quantity"

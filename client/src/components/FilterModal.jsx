@@ -80,6 +80,20 @@ const FilterModal = ({
             />
           </div>
         </div>
+        <div className="modal-div">
+          <h4>Category</h4>
+          <div className="select-main-box">
+            <MultiSelectBox
+              multiple={true}
+              options={FilterOptions.category.map((item) => ({
+                value: item,
+                label: item,
+              }))}
+              value={filters.category === "" ? [] : filters.category.split(",")}
+              onChange={(e) => changeFilter({ category: e.join(",") })}
+            />
+          </div>
+        </div>
         <div className="modal-div price-div-title">
           <h4 className="price-div-title">Price Range</h4>
         </div>

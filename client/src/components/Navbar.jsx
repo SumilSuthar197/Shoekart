@@ -1,6 +1,6 @@
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import "../styles/navbar.css";
-import logo from "../assets/LOGO.svg";
+// import logo from "../assets/LOGO.svg";
 import { FiSearch, FiMenu } from "react-icons/fi";
 import { FaShoppingCart } from "react-icons/fa";
 import { CgProfile, CgClose } from "react-icons/cg";
@@ -28,7 +28,8 @@ const Navbar = () => {
         <FiMenu />
       </div>
       <span className="logo">
-        <img src={logo} alt="LOGO" />
+        <Link to="/">SHOEKART</Link>
+        {/* <img src={logo} alt="LOGO" /> */}
       </span>
       <div className={isOpen ? "nav-links-md" : "nav-links"}>
         <div

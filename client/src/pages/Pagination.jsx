@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
 const Pagination = ({
@@ -61,4 +62,4 @@ const Pagination = ({
   );
 };
 
-export default Pagination;
+export default memo(Pagination);

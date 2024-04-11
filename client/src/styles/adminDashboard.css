@@ -45,9 +45,11 @@
   gap: 0rem;
 }
 .sideBrandName {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 700;
   color: #1a1a1a;
+  text-decoration: none;
+  font-style: italic;
 }
 .sideBrandLink {
   color: #1a1a1a;
@@ -139,7 +141,7 @@
   padding: 1.5rem 1.25rem;
   flex-direction: column;
   border-radius: 0.5rem;
-  height: fit-content;
+  /* height: fit-content; */
   gap: 0.5rem;
   background-color: #f3f4f6;
   width: 100%;
@@ -386,6 +388,51 @@
 .dash-input-3 .dash-size-group .form-group {
   width: 49%;
 }
+.graphBox {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  width: 100%;
+  min-height: 400px;
+}
+
+.graphBox .graph-box {
+  position: relative;
+  background-color: #f3f4f6;
+  padding: 1.5rem 1.25rem;
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 28rem;
+  object-fit: cover;
+}
+.prod-details-cont select:disabled,
+.prod-details-cont .add-to-carts:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+.no-data-message {
+  text-align: center;
+  margin-top: 0.7rem;
+  color: #1a1a1a;
+  opacity: 0.7;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 1100px) {
+  .graphBox {
+    flex-direction: column;
+    margin-top: 1rem;
+  }
+  .graphBox .graph-box {
+    height: auto;
+    margin: 0;
+  }
+}
 @media screen and (max-width: 1024px) {
   .dashPage .dashSidebar {
     position: fixed;
@@ -441,28 +488,19 @@
   }
 }
 
-/* graph */
-.graphBox {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
+/* .charts {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: 20px;
   width: 100%;
-  min-height: 400px;
+  margin: 1rem 0;
+  padding: 20px;
+  padding-top: 0;
 }
-
-.graphBox .graph-box {
-  position: relative;
+.chart{
   background-color: #f3f4f6;
-  padding: 1.5rem 1.25rem;
-  margin: 2rem 0;
-  border-radius: 0.5rem;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 400px;
-}
-
-.graphBox .box-1 {
-  width: 100%;
-}
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.1);
+  width: 100%;    
+} */

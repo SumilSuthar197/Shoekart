@@ -26,6 +26,7 @@ import AdminProductList from "./pages/AdminProductList";
 import AddProducts from "./pages/AddProducts";
 import UpdateProducts from "./pages/UpdateProducts";
 import BrandList from "./pages/BrandList";
+import CategoryList from "./pages/CategoryList";
 
 const App = () => {
   const { setAuth } = useAuth();
@@ -87,7 +88,6 @@ const App = () => {
         >
           <Route index element={<MyOrders />} />
         </Route>
-
         <Route
           path="/admin"
           element={
@@ -104,6 +104,7 @@ const App = () => {
           <Route path="product/add" element={<AddProducts />} />
           <Route path="product/update/:slug" element={<UpdateProducts />} />
           <Route path="brands" element={<BrandList />} />
+          <Route path="category" element={<CategoryList />} />
         </Route>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />

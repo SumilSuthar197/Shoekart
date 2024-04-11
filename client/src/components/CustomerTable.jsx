@@ -19,6 +19,7 @@ const CustomerTable = ({ columns, data, handleChange }) => {
   } = useTable({ columns, data }, useSortBy, usePagination);
   const startPage = Math.max(1, pageIndex - 3);
   const endPage = Math.min(pageOptions.length, startPage + 4);
+
   return (
     <div className="reactTableMain">
       <div style={{ overflow: "auto" }}>
@@ -86,18 +87,24 @@ const CustomerTable = ({ columns, data, handleChange }) => {
           </tbody>
         </table>
       </div>
-      <AdminPagination
-        startPage={startPage}
-        endPage={endPage}
-        canNextPage={canNextPage}
-        canPreviousPage={canPreviousPage}
-        gotoPage={gotoPage}
-        nextPage={nextPage}
-        previousPage={previousPage}
-        pageIndex={pageIndex}
-        totalPageCount={pageOptions.length}
-        key={pageIndex}
-      />
+      {data.length === 0 ? (
+        <div className="no-data-message">
+          Unfortunately, we couldn't find any data that matches your criteria.
+        </div>
+      ) : (
+        <AdminPagination
+          startPage={startPage}
+          endPage={endPage}
+          canNextPage={canNextPage}
+          canPreviousPage={canPreviousPage}
+          gotoPage={gotoPage}
+          nextPage={nextPage}
+          previousPage={previousPage}
+          pageIndex={pageIndex}
+          totalPageCount={pageOptions.length}
+          key={pageIndex}
+        />
+      )}
     </div>
   );
 };

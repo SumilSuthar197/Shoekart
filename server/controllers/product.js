@@ -5,6 +5,7 @@ const errorHandler = require("../utils/errorHandler");
 const order = require("../models/order");
 const user = require("../models/user");
 const brands = require("../models/brands");
+const category = require("../models/category");
 
 const getAllProducts = asyncErrorHandler(async (req, res, next) => {
   const products = await product.find({});
@@ -23,6 +24,7 @@ const getProducts = asyncErrorHandler(async (req, res, next) => {
   const sizes = req.query.size;
   const brand = req.query.brand;
   const priceRange = req.query.price;
+  const categoryOpt = req.query.category;
 
   const query = {
     name: { $regex: search, $options: "i" },
@@ -43,6 +45,10 @@ const getProducts = asyncErrorHandler(async (req, res, next) => {
 
   if (sizes && sizes.length > 0) {
     query["sizeQuantity.size"] = { $in: sizes.map(Number) };
+  }
+
+  if (categoryOpt) {
+    query.category = { $regex: categoryOpt, $options: "i" };
   }
 
   let sortField = "createdAt";
@@ -67,6 +73,8 @@ const getProducts = asyncErrorHandler(async (req, res, next) => {
   const colorOptions = await product.distinct("color");
   const brandOption = await brands.find({}).select("name");
   const brandOptions = brandOption.map((brand) => brand.name);
+  const categoryOption = await category.find({}).select("name");
+  const categoryOptions = categoryOption.map((category) => category.name);
   const total = await product.countDocuments(query);
 
   res.status(200).json({
@@ -75,6 +83,7 @@ const getProducts = asyncErrorHandler(async (req, res, next) => {
     products,
     colorOptions,
     brandOptions,
+    categoryOptions,
   });
 });
 
@@ -104,6 +113,7 @@ const createProduct = asyncErrorHandler(async (req, res, next) => {
     color,
     material,
     featured,
+    category,
   } = req.body;
 
   if (
@@ -115,6 +125,7 @@ const createProduct = asyncErrorHandler(async (req, res, next) => {
     !price ||
     !color ||
     !material ||
+    !category ||
     sizeQuantity.length === 0
   ) {
     return next(new errorHandler("Please fill all fields", 400));
@@ -135,6 +146,7 @@ const createProduct = asyncErrorHandler(async (req, res, next) => {
     sizeQuantity,
     color,
     material,
+    category,
     isFeatured: featured,
   });
 
@@ -162,6 +174,7 @@ const updateProduct = asyncErrorHandler(async (req, res, next) => {
     color,
     material,
     featured,
+    category,
   } = req.body;
 
   if (
@@ -173,6 +186,7 @@ const updateProduct = asyncErrorHandler(async (req, res, next) => {
     !price ||
     !color ||
     !material ||
+    !category ||
     sizeQuantity.length === 0
   ) {
     return next(new errorHandler("Please fill all fields", 400));
@@ -193,6 +207,7 @@ const updateProduct = asyncErrorHandler(async (req, res, next) => {
   productExists.color = color;
   productExists.material = material;
   productExists.isFeatured = featured;
+  productExists.category = category;
 
   await productExists.save();
 
@@ -205,12 +220,15 @@ const updateProduct = asyncErrorHandler(async (req, res, next) => {
 const getFilterOptions = asyncErrorHandler(async (req, res, next) => {
   const colors = await product.distinct("color");
   // const brands = await product.distinct("brand");
+  // const categories = await product.distinct("category");
+  const category = await category.find({}).select("name");
   const brands = await brands.find({}).select("name");
 
   res.status(200).json({
     success: true,
     colors,
     brands,
+    category,
   });
 });
 

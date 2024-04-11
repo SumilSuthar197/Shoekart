@@ -92,6 +92,7 @@ const ProductDetails = () => {
           name="size"
           id="size"
           value={size}
+          disabled={data.sizeQuantity.length === 0}
           onChange={(e) => setSize(e.target.value)}
         >
           <option value="">Select Size</option>
@@ -105,11 +106,32 @@ const ProductDetails = () => {
               ))}
         </select>
 
-        <button className="add-to-carts" onClick={handleAddToCart}>
+        <button
+          disabled={data.sizeQuantity.length === 0}
+          className="add-to-carts"
+          onClick={handleAddToCart}
+        >
           Add to cart
         </button>
+        {data.sizeQuantity.length === 0 && (
+          <p className="outOfStock">
+            Unfortunately, this product is currently out of stock.
+          </p>
+        )}
         <h3 className="pDescTitle">Product Details</h3>
         <p>{data.description}</p>
+        <h3 className="pDescTitle">
+          Color:{" "}
+          <p style={{ fontWeight: "normal", display: "inline" }}>
+            {data.color}
+          </p>
+        </h3>
+        <h3 className="pDescTitle">
+          Material:{" "}
+          <p style={{ fontWeight: "normal", display: "inline" }}>
+            {data.material}
+          </p>
+        </h3>
         <h3 className="pDescTitle">Features:</h3>
         <div style={{ marginLeft: "15px" }}>
           {" "}
@@ -163,7 +185,7 @@ const ProductDetails = () => {
         </div>
         <h3 className="pDescTitle">Offers</h3>
         <ul type="none">
-          <li>Use &apos;NIKE2023&apos; to avail flat $500 Off</li>
+          <li>Use &apos;SUMILSUTHAR197&apos; to avail flat 10% Off</li>
         </ul>
         <div style={{ marginTop: "15px" }}>
           {data.ratings.length > 0 && (

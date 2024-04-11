@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import Axios from "../Axios";
 import TriangleLoader from "../components/TriangleLoader";
 
-const BrandList = () => {
+const CategoryList = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const fetch = async () => {
@@ -13,14 +13,14 @@ const BrandList = () => {
       if (!token) {
         return toast.error("Access denied. Please login first.");
       }
-      const response = await Axios.get("/brands", {
+      const response = await Axios.get("/category", {
         headers: {
           Authorization: token,
         },
       });
       console.log(response.data);
       if (response.data.success) {
-        setData(response.data.brands);
+        setData(response.data.categories);
       }
       setLoading(false);
     } catch (error) {
@@ -37,16 +37,8 @@ const BrandList = () => {
       accessor: "name",
     },
     {
-      Header: "Email",
-      accessor: "email",
-    },
-    {
-      Header: "Active Products",
-      accessor: "activeProducts",
-    },
-    {
-      Header: "Total Products",
-      accessor: "totalProducts",
+      Header: "Description",
+      accessor: "description",
     },
   ];
 
@@ -54,27 +46,13 @@ const BrandList = () => {
     id: "",
     name: "",
     description: "",
-    email: "",
-    isActivate: true,
   });
 
   const handleChange = (e) => {
-    setFormData({
-      id: e._id,
-      name: e.name,
-      description: e.description,
-      email: e.email,
-      isActivate: e.isActivate,
-    });
+    setFormData({ id: e._id, name: e.name, description: e.description });
   };
   const resetForm = () => {
-    setFormData({
-      id: "",
-      name: "",
-      description: "",
-      email: "",
-      isActivate: true,
-    });
+    setFormData({ id: "", name: "", description: "" });
   };
 
   const handleUpdate = (id) => async () => {
@@ -87,7 +65,7 @@ const BrandList = () => {
         return toast.error("Access denied.");
       }
       const response = await Axios.put(
-        `/brands/${id}`,
+        `/category/${id}`,
         { ...formData },
         {
           headers: {
@@ -96,13 +74,14 @@ const BrandList = () => {
         }
       );
       toast.success(response.data.message);
-      setData(response.data.brands);
+      setData(response.data.categories);
       resetForm();
     } catch (error) {
       toast.error(error?.response?.data?.message);
       resetForm();
     }
   };
+
   const handleInputChange = (event) => {
     setFormData({
       ...formData,
@@ -113,7 +92,7 @@ const BrandList = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      if (!formData.name || !formData.description || !formData.email) {
+      if (!formData.name || !formData.description) {
         return toast.error("Please fill all the fields.");
       }
       const token = localStorage.getItem("jwtAdmin");
@@ -121,7 +100,7 @@ const BrandList = () => {
         return toast.error("Access denied.");
       }
       const response = await Axios.post(
-        "/brands",
+        "/category",
         { ...formData },
         {
           headers: {
@@ -135,10 +114,31 @@ const BrandList = () => {
       toast.error(error?.response?.data?.message);
     }
   };
+  const deleteCoupon = async (id) => {
+    try {
+      if (!id) {
+        return toast.error("Please select a brand to delete.");
+      }
+      const token = localStorage.getItem("jwtAdmin");
+      if (!token) {
+        return toast.error("Access denied.");
+      }
+      const response = await Axios.delete(`/category/${id}`, {
+        headers: {
+          Authorization: token,
+        },
+      });
+      fetch();
+      resetForm();
+      toast.success(response.data.message);
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
   if (loading) return <TriangleLoader height="500px" />;
   return (
     <div className="dashboardMain">
-      <h1>Brands</h1>
+      <h1>Category</h1>
       <div className="dashOverview dash-forms">
         <form onSubmit={handleFormSubmit}>
           <div className="inputs">
@@ -148,7 +148,7 @@ const BrandList = () => {
                 type="text"
                 className="form-control"
                 id="name"
-                placeholder="Enter brand name"
+                placeholder="Enter category name"
                 onChange={handleInputChange}
                 value={formData.name}
               />
@@ -164,33 +164,13 @@ const BrandList = () => {
                 value={formData.description}
               />
             </div>
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                className="form-control"
-                id="email"
-                placeholder="Enter brand email"
-                onChange={handleInputChange}
-                value={formData.email}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="isActivate">Status</label>
-              <select
-                className="form-control"
-                id="isActivate"
-                onChange={handleInputChange}
-                value={formData.isActivate}
-              >
-                <option value="true">True</option>
-                <option value="false">False</option>
-              </select>
-            </div>
           </div>
           <div className="inputs-btn">
             <button type="button" onClick={handleUpdate(formData.id)}>
               Update
+            </button>
+            <button type="button" onClick={() => deleteCoupon(formData.id)}>
+              Delete
             </button>
             <button type="submit">Add</button>
           </div>
@@ -207,4 +187,4 @@ const BrandList = () => {
   );
 };
 
-export default BrandList;
+export default CategoryList;

@@ -26,6 +26,12 @@ const productSchema = new mongoose.Schema(
       trim: true,
       required: [true, "Please provide a brand"],
     },
+    category: {
+      type: String,
+      lowercase: true,
+      trim: true,
+      required: [true, "Please provide a category"],
+    },
     image: {
       type: String,
       trim: true,
