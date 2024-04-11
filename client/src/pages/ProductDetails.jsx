@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import Axios from "../Axios";
 import { toast } from "react-toastify";
 import TriangleLoader from "../components/TriangleLoader";
-import RatingCard from "../components/RatingCard";
 import useAuth from "../../hooks/useAuth";
 import Star from "../components/Star";
+import RatingContainer from "../components/RatingContainer";
 
 const ProductDetails = () => {
   const { slug } = useParams();
@@ -81,9 +81,9 @@ const ProductDetails = () => {
         </div>
       </div>
       <div className="prod-details-cont">
-        <h1 className="ptitle">{data.brand + " " + data.name}</h1>
+        <h1 className="ptitle">{data.brand + " " + data.name.toLowerCase()}</h1>
         <h3 className="pprize">
-          ${data.price} <span>$3000 </span>
+          ₹ {data.price} <span>3000 </span>
         </h3>
         <div className="pStar">
           <Star rating={data.ratingScore / data.ratings.length || 0} />
@@ -185,18 +185,9 @@ const ProductDetails = () => {
         </div>
         <h3 className="pDescTitle">Offers</h3>
         <ul type="none">
-          <li>Use &apos;SUMILSUTHAR197&apos; to avail flat 10% Off</li>
+          <li>Use &apos;SUMILSUTHAR197&apos; to avail flat 20% Off</li>
         </ul>
-        <div style={{ marginTop: "15px" }}>
-          {data.ratings.length > 0 && (
-            <>
-              <h3 className="pDescTitle">Rating </h3>
-              {data.ratings.map((data, index) => (
-                <RatingCard key={index} data={data} />
-              ))}
-            </>
-          )}
-        </div>
+        <RatingContainer ratings={data.ratings} />
       </div>
     </section>
   );

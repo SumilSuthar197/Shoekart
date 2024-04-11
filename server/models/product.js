@@ -60,13 +60,11 @@ const productSchema = new mongoose.Schema(
     },
     color: {
       type: String,
-      lowercase: true,
       trim: true,
       required: [true, "Please provide a color"],
     },
     material: {
       type: String,
-      lowercase: true,
       trim: true,
     },
     isActive: {

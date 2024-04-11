@@ -60,9 +60,7 @@ const SignUpPage = () => {
                 id="name"
                 name="name"
                 value={user.name}
-                onChange={(e) =>
-                  setUser({ ...user, name: e.target.value.trim() })
-                }
+                onChange={(e) => setUser({ ...user, name: e.target.value })}
                 placeholder="Enter your name"
               />
             </div>
@@ -73,9 +71,7 @@ const SignUpPage = () => {
                 id="email"
                 name="email"
                 value={user.email}
-                onChange={(e) =>
-                  setUser({ ...user, email: e.target.value.trim() })
-                }
+                onChange={(e) => setUser({ ...user, email: e.target.value })}
                 placeholder="Enter your email"
               />
             </div>
@@ -85,9 +81,7 @@ const SignUpPage = () => {
                 type="password"
                 id="password"
                 value={user.password}
-                onChange={(e) =>
-                  setUser({ ...user, password: e.target.value.trim() })
-                }
+                onChange={(e) => setUser({ ...user, password: e.target.value })}
                 name="password"
                 placeholder="Enter your password"
               />

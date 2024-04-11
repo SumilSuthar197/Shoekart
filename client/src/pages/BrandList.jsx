@@ -131,6 +131,7 @@ const BrandList = () => {
       );
       toast.success(response.data.message);
       fetch();
+      resetForm();
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }

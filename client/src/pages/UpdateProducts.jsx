@@ -45,6 +45,7 @@ const UpdateProducts = () => {
           name: response.data.data.name,
           price: response.data.data.price,
           sku: response.data.data.sku,
+          category: response.data.data.category,
         });
         setLoading(false);
       } catch (error) {

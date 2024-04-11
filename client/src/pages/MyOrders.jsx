@@ -69,7 +69,7 @@ const MyOrders = () => {
   return (
     <div className="orderMainContainer">
       <h1 className="cHeader">My Orders</h1>
-      <div className="orderContainer">
+      <div className="orderContainer" style={{flexDirection:"column"}}>
         <table className="order-table">
           <thead>
             <tr>

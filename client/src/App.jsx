@@ -30,6 +30,15 @@ import CategoryList from "./pages/CategoryList";
 
 const App = () => {
   const { setAuth } = useAuth();
+  const ScrollToTop = () => {
+    const { pathname } = useLocation();
+    console.log("ScrollToTop");
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [pathname]);
+
+    return null;
+  };
   useEffect(() => {
     console.log("App.js");
     const rememberedUserToken = localStorage.getItem("jwt") || "";
@@ -55,20 +64,9 @@ const App = () => {
       fetchUser();
     }
   }, []);
-  // useEffect(() => {
-  //   const handleNavigation = () => {
-  //     window.scrollTo(0, 0);
-  //   };
-  //   return () => router.subscribe(handleNavigation);
-  // }, []);
-  // return <RouterProvider router={router} />;
-  // const location = useLocation();
-
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  // }, [location]);
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<HomeLayout />}>
           <Route index element={<LandingPage />} />

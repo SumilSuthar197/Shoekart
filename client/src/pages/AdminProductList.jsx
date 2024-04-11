@@ -199,7 +199,7 @@ const AdminProductList = () => {
         {(!data || data.length <= 0) && (
           <div className="empty-cart">
             <img src={EmptyImage} alt="empty-cart" />
-            <p>No orders have been placed yet.</p>
+            <p>No products have been added yet. Start adding some!</p>
           </div>
         )}
       </div>

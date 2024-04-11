@@ -48,10 +48,7 @@ const LoginPage = () => {
           <h1 className="login-heading">Log in to your account</h1>
           <h2 className="login-subheading">
             Don&apos;t have an account?{" "}
-            <Link
-              className="signup-link"
-              to="/signup"
-            >
+            <Link className="signup-link" to="/signup">
               Sign up
             </Link>
           </h2>
@@ -63,9 +60,7 @@ const LoginPage = () => {
                 id="email"
                 name="email"
                 value={user.email}
-                onChange={(e) =>
-                  setUser({ ...user, email: e.target.value.trim() })
-                }
+                onChange={(e) => setUser({ ...user, email: e.target.value })}
                 placeholder="Enter your email"
               />
             </div>
@@ -75,9 +70,7 @@ const LoginPage = () => {
                 type="password"
                 id="password"
                 value={user.password}
-                onChange={(e) =>
-                  setUser({ ...user, password: e.target.value.trim() })
-                }
+                onChange={(e) => setUser({ ...user, password: e.target.value })}
                 name="password"
                 placeholder="Enter your password"
               />

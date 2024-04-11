@@ -50,7 +50,7 @@ const login = asyncErrorHandler(async (req, res, next) => {
     { id: userExists._id, email: userExists.email },
     secret,
     {
-      expiresIn: "30d",
+      expiresIn: "48h",
     }
   );
 

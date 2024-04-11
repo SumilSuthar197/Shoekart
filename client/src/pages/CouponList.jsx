@@ -54,7 +54,7 @@ const CouponList = () => {
   const [formData, setFormData] = useState({
     name: "",
     discount: "",
-    duration: "",
+    duration: "forever",
     duration_in_months: "",
     max_redemptions: "",
   });
