@@ -9,10 +9,6 @@ import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 
 const Navbar = () => {
-  const handleTrendingClick = () => {
-    const trendingSection = document.getElementById("featuredProd");
-    trendingSection.scrollIntoView({ behavior: "smooth" });
-  };
   const navigate = useNavigate();
   const { auth, setAuth } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
@@ -50,11 +46,11 @@ const Navbar = () => {
           Home
         </NavLink>
         <NavLink
-          to="/#trending"
+          to="/"
+          state={{ scrollToTop: true }}
           className="nav-link"
           onClick={() => {
             setIsOpen(!isOpen);
-            handleTrendingClick();
           }}
         >
           Trending

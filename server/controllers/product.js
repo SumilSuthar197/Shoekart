@@ -51,7 +51,7 @@ const getProducts = asyncErrorHandler(async (req, res, next) => {
     query.category = { $regex: categoryOpt, $options: "i" };
   }
 
-  let sortField = "color";
+  let sortField = "createdAt";
   let sortOrder = 1;
 
   if (sortParam) {

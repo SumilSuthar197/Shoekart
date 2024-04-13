@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useContext } from "react";
 import kid from "../Images/kid.webp";
 import men from "../Images/men.webp";
 import women from "../Images/women.webp";
@@ -9,21 +9,21 @@ import BannerSection from "../components/BannerSection";
 import FeaturedIcon from "../components/FeaturedIcon";
 import LandingBanner from "../components/LandingBanner";
 import "../styles/landingpage.css";
-import Axios from "../Axios";
+import { useLocation } from "react-router-dom";
+import { LoadingContext } from "./HomeLayout";
 
 const LandingPage = () => {
-  const [data, setData] = useState(null);
+  const { data, setData } = useContext(LoadingContext);
+  const trendingRef = useRef(null);
+  const scrollToTop = () => {
+    trendingRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+  const location = useLocation();
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await Axios.get("/product/featured");
-        setData(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, []);
+    if (location.state?.scrollToTop) {
+      scrollToTop();
+    }
+  }, [location.state]);
 
   return (
     <>
@@ -45,6 +45,7 @@ const LandingPage = () => {
       </section>
 
       <Container />
+
       {data?.featured && data.featured.length > 0 && (
         <>
           <section id="featuredProd" className="title">
@@ -63,7 +64,7 @@ const LandingPage = () => {
       )}
 
       <Countdown />
-
+      <div ref={trendingRef} style={{ marginBottom: "15px" }}></div>
       {data?.trending && data.trending.length > 0 && (
         <>
           <section className="title">
