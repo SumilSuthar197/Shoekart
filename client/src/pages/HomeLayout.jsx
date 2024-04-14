@@ -8,7 +8,6 @@ import Axios from "../Axios";
 export const LoadingContext = createContext();
 
 const HomeLayout = () => {
-  // const { setData } = useContext(LoadingContext);
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState({});
   useEffect(() => {
@@ -24,7 +23,11 @@ const HomeLayout = () => {
     fetchData();
   }, []);
   if (loading) {
-    return <TriangleLoader height="100vh" />;
+    return (
+      <div style={{background:"#F7ECDE"}}>
+        <TriangleLoader height="100vh" />
+      </div>
+    );
   }
   return (
     <>

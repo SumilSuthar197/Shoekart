@@ -72,7 +72,7 @@ const CouponList = () => {
   const handleInputChange = (event) => {
     setFormData({
       ...formData,
-      [event.target.id]: event.target.value,
+      [event.target.id]: event.target.value.trim(),
     });
   };
 
@@ -111,6 +111,10 @@ const CouponList = () => {
       if (!formData.name) {
         return toast.error("Please select a coupon to delete.");
       }
+      if (formData.name === "SUMILSUTHAR197") {
+        return toast.error("You can't delete this coupon.");
+      }
+
       const token = localStorage.getItem("jwtAdmin");
       if (!token) {
         return toast.error("Access denied.");
@@ -150,6 +154,7 @@ const CouponList = () => {
                 className="form-control"
                 id="name"
                 placeholder="Enter coupon name"
+                style={{ textTransform: "uppercase" }}
                 onChange={handleInputChange}
                 value={formData.name}
               />
@@ -160,6 +165,8 @@ const CouponList = () => {
                 type="number"
                 className="form-control"
                 id="discount"
+                min="0"
+                max="100"
                 placeholder="Enter discount in percentage"
                 onChange={handleInputChange}
                 value={formData.discount}
@@ -183,7 +190,8 @@ const CouponList = () => {
                 type="number"
                 className="form-control"
                 id="duration_in_months"
-                min={0}
+                min="0"
+                max="12"
                 placeholder="valid for how many months?"
                 disabled={formData.duration === "forever"}
                 onChange={handleInputChange}
@@ -197,7 +205,7 @@ const CouponList = () => {
                 type="number"
                 className="form-control"
                 id="max_redemptions"
-                placeholder="Enter 0 for unlimited redemptions"
+                placeholder="Enter 999 for unlimited redemptions"
                 onChange={handleInputChange}
                 value={formData.max_redemptions}
               />

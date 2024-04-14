@@ -263,11 +263,15 @@ const getAdminDetails = asyncErrorHandler(async (req, res) => {
   ]);
 
   label2.forEach((status) => {
-    orderUpdate.forEach((data) => {
-      if (data._id.toLowerCase() === status.toLowerCase()) {
-        data2.push(data.count);
-      }
-    });
+    const matchingOrderUpdate = orderUpdate.find(
+      (data) => data._id.toLowerCase() === status.toLowerCase()
+    );
+
+    if (matchingOrderUpdate) {
+      data2.push(matchingOrderUpdate.count);
+    } else {
+      data2.push(0);
+    }
   });
   const totalUsers = await user.countDocuments({ role: "user" });
   const totalOrders = await order.countDocuments();

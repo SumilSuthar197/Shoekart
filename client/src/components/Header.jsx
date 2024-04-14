@@ -2,12 +2,12 @@ import "../styles/contactpage.css";
 import PropTypes from "prop-types";
 
 const Header = (props) => {
-  const { text1, text2, url } = props.combinedText;
+  const { text1, text2 } = props.combinedText;
   return (
     <div
       className="Header_title"
       style={{
-        backgroundImage: `url(${url})`,
+        backgroundImage: `url("/src/Images/1.jpg")`,
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
