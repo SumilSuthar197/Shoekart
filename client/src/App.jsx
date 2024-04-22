@@ -18,6 +18,7 @@ import useAuth from "../hooks/useAuth";
 import ProtectedRoute from "./utils/protectedRoute";
 import AdminRoute from "./utils/adminRoute";
 import TriangleLoader from "./components/TriangleLoader";
+import ResetPassword from "./pages/ResetPassword";
 
 const AdminLayout = lazy(() => import("./pages/AdminLayout"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
@@ -107,6 +108,7 @@ const App = () => {
           </Route>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/resetpassword" element={<ResetPassword />} />
           <Route path="/adminLogin" element={<AdminLogin />} />
           <Route path="checkout-success" element={<CheckoutSuccess />} />
           <Route path="/*" element={<ErrorPage />} />
