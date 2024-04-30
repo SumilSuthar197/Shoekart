@@ -1,7 +1,6 @@
 require("dotenv").config();
 const user = require("../models/user");
 const jwt = require("jsonwebtoken");
-const nodemailer = require("nodemailer");
 const secret = process.env.JWT_SECRET;
 const sendEmail = require("../utils/sendEmail");
 const asyncErrorHandler = require("../middleware/asyncErrorHandler");
@@ -202,7 +201,6 @@ const forgetPassword = asyncErrorHandler(async (req, res, next) => {
   res.status(200).json({
     success: true,
     message: `Email sent to ${email}`,
-    token,
   });
 });
 

@@ -1,17 +1,15 @@
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import loginImage from "../Images/abc4.png";
 import "../styles/auth.css";
 import { useState } from "react";
 import Axios from "../Axios";
 import { toast } from "react-toastify";
-import useAuth from "../../hooks/useAuth";
 
 const ResetPassword = () => {
   const navigate = useNavigate();
   const queryParams = new URLSearchParams(location.search);
   const id = queryParams.get("id");
   const token = queryParams.get("token");
-  //   const token = useLocation().search.split("=")[1];
   console.log(token, id);
   if (token === undefined || token === "") {
     toast.error("Invalid token. Please try again.");
